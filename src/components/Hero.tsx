@@ -9,7 +9,7 @@ import {
   useTransform,
   type Variants,
 } from "framer-motion";
-import { ArrowDown, Sparkles } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { profile } from "@/lib/data";
 
 const fadeUp: Variants = {
@@ -63,27 +63,11 @@ export default function Hero() {
 
       <div className="relative mx-auto max-w-6xl px-6 w-full grid lg:grid-cols-[1.15fr_0.85fr] gap-14 items-center">
         <div>
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            custom={0}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs sm:text-sm text-muted mb-8"
-          >
-            <motion.span
-              animate={{ rotate: [0, 15, 0, -15, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <Sparkles size={14} className="text-accent-cyan" />
-            </motion.span>
-            Deze site vervangt mijn motivatiebrief voor {profile.companyName}
-          </motion.div>
-
           <motion.h1
             variants={fadeUp}
             initial="hidden"
             animate="show"
-            custom={1}
+            custom={0}
             className="font-display text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight text-foreground leading-[1.02]"
           >
             {profile.name}
@@ -93,7 +77,7 @@ export default function Hero() {
             variants={fadeUp}
             initial="hidden"
             animate="show"
-            custom={2}
+            custom={1}
             className="mt-5 text-lg sm:text-xl text-gradient font-medium"
           >
             {profile.title}
@@ -103,7 +87,7 @@ export default function Hero() {
             variants={fadeUp}
             initial="hidden"
             animate="show"
-            custom={3}
+            custom={2}
             className="mt-6 max-w-xl text-base sm:text-lg text-muted leading-relaxed"
           >
             {profile.tagline} Deze site is mijn motivatiebrief, alleen dan als werkend
@@ -114,7 +98,7 @@ export default function Hero() {
             variants={fadeUp}
             initial="hidden"
             animate="show"
-            custom={4}
+            custom={3}
             className="mt-9 flex flex-wrap items-center gap-4"
           >
             <motion.button
@@ -154,7 +138,7 @@ export default function Hero() {
             >
               <div className="relative rounded-[1.6rem] overflow-hidden aspect-[4/5]">
                 <Image
-                  src="/images/jesse-bodde.jpg"
+                  src="/images/jesse-bodde.png"
                   alt={`Portretfoto van ${profile.name}`}
                   fill
                   priority
