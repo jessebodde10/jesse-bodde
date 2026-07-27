@@ -23,7 +23,7 @@ export default function WhyTraineeship() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl"
         >
-          <p className="text-sm font-medium text-accent-cyan tracking-wide uppercase mb-4">
+          <p className="text-sm font-medium text-accent-600 tracking-wide uppercase mb-4">
             Waarom dit traineeship
           </p>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
@@ -52,7 +52,7 @@ export default function WhyTraineeship() {
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                  className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-cyan to-accent-indigo flex items-center justify-center shrink-0"
+                  className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-600 to-accent-400 flex items-center justify-center shrink-0"
                 >
                   <item.icon size={18} className="text-on-accent" />
                 </motion.div>

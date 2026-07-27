@@ -20,10 +20,10 @@ export default function Contact() {
             className="bg-glow animate-glow w-[420px] h-[420px] -top-32 left-1/2 -translate-x-1/2"
             aria-hidden="true"
           />
-          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-accent-indigo via-accent-violet to-accent-pink bg-[length:200%_100%] accent-shimmer" />
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-accent-400 via-accent-500 to-accent-700 bg-[length:200%_100%] accent-shimmer" />
 
           <div className="relative">
-            <p className="text-sm font-medium text-accent-cyan tracking-wide uppercase mb-4">
+            <p className="text-sm font-medium text-accent-600 tracking-wide uppercase mb-4">
               Contact
             </p>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground leading-tight max-w-2xl mx-auto">
@@ -39,7 +39,7 @@ export default function Contact() {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => window.dispatchEvent(new Event("open-pitch"))}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-accent-indigo to-accent-violet text-on-accent text-sm sm:text-base font-medium hover:shadow-[0_0_40px_-10px_rgba(217,119,6,0.6)] transition-shadow"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-accent-400 to-accent-500 text-on-accent text-sm sm:text-base font-medium hover:shadow-[0_0_40px_-10px_rgba(217,119,6,0.6)] transition-shadow"
               >
                 <motion.span
                   animate={{ rotate: [0, -12, 12, 0] }}
@@ -54,7 +54,7 @@ export default function Contact() {
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
               <a
                 href={`mailto:${profile.email}`}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-foreground/5 hover:bg-foreground/10 text-foreground/85 text-sm transition-all hover:scale-105 active:scale-95"
+                className="inline-flex items-center gap-2 min-h-11 px-5 py-2.5 rounded-full bg-foreground/5 hover:bg-foreground/10 text-foreground/85 text-sm transition-all hover:scale-105 active:scale-95"
               >
                 <Mail size={15} /> {profile.email}
               </a>
@@ -62,7 +62,7 @@ export default function Contact() {
                 href={profile.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-foreground/5 hover:bg-foreground/10 text-foreground/85 text-sm transition-all hover:scale-105 active:scale-95"
+                className="inline-flex items-center gap-2 min-h-11 px-5 py-2.5 rounded-full bg-foreground/5 hover:bg-foreground/10 text-foreground/85 text-sm transition-all hover:scale-105 active:scale-95"
               >
                 <LinkedinIcon size={15} /> LinkedIn
               </a>
@@ -71,7 +71,7 @@ export default function Contact() {
                   href={profile.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-foreground/5 hover:bg-foreground/10 text-foreground/85 text-sm transition-all hover:scale-105 active:scale-95"
+                  className="inline-flex items-center gap-2 min-h-11 px-5 py-2.5 rounded-full bg-foreground/5 hover:bg-foreground/10 text-foreground/85 text-sm transition-all hover:scale-105 active:scale-95"
                 >
                   <GithubIcon size={15} /> GitHub
                 </a>
@@ -79,7 +79,7 @@ export default function Contact() {
               <a
                 href={profile.cvUrl}
                 download
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-foreground/5 hover:bg-foreground/10 text-foreground/85 text-sm transition-all hover:scale-105 active:scale-95"
+                className="inline-flex items-center gap-2 min-h-11 px-5 py-2.5 rounded-full bg-foreground/5 hover:bg-foreground/10 text-foreground/85 text-sm transition-all hover:scale-105 active:scale-95"
               >
                 <FileDown size={15} /> Download CV
               </a>

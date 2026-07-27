@@ -42,7 +42,7 @@ export default function Skills() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-sm font-medium text-accent-cyan tracking-wide uppercase mb-4">
+          <p className="text-sm font-medium text-accent-600 tracking-wide uppercase mb-4">
             Mijn vaardigheden
           </p>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground leading-tight max-w-2xl">
@@ -57,9 +57,9 @@ export default function Skills() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
               onClick={() => setActive(g as typeof active)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`inline-flex items-center min-h-11 px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 active === g
-                  ? "bg-gradient-to-r from-accent-indigo to-accent-violet text-on-accent"
+                  ? "bg-gradient-to-r from-accent-400 to-accent-500 text-on-accent"
                   : "glass text-muted hover:text-foreground"
               }`}
             >
@@ -88,7 +88,7 @@ export default function Skills() {
                   <h3 className="text-foreground font-medium text-sm sm:text-base pr-2">
                     {skill.name}
                   </h3>
-                  <span className="text-xs text-accent-cyan tabular-nums shrink-0">
+                  <span className="text-xs text-accent-600 tabular-nums shrink-0">
                     <CountUp value={skill.level} />
                   </span>
                 </div>
@@ -99,7 +99,7 @@ export default function Skills() {
                     whileInView={{ width: `${skill.level}%` }}
                     viewport={{ once: true }}
                     transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    className="h-full rounded-full bg-gradient-to-r from-accent-cyan via-accent-indigo to-accent-violet"
+                    className="h-full rounded-full bg-gradient-to-r from-accent-600 via-accent-400 to-accent-500"
                   />
                 </div>
 

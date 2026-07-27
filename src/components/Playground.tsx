@@ -84,7 +84,7 @@ export default function Playground() {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <p className="text-sm font-medium text-accent-cyan tracking-wide uppercase mb-4">
+          <p className="text-sm font-medium text-accent-600 tracking-wide uppercase mb-4">
             AI Playground
           </p>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
@@ -107,9 +107,9 @@ export default function Playground() {
               <button
                 key={qa.id}
                 onClick={() => handleAsk(qa)}
-                className={`text-xs sm:text-sm px-4 py-2 rounded-full transition-all ${
+                className={`inline-flex items-center min-h-11 text-xs sm:text-sm px-4 py-2 rounded-full transition-all ${
                   active?.id === qa.id
-                    ? "bg-gradient-to-r from-accent-indigo to-accent-violet text-on-accent"
+                    ? "bg-gradient-to-r from-accent-400 to-accent-500 text-on-accent"
                     : "bg-foreground/5 text-muted hover:text-foreground hover:bg-foreground/10"
                 }`}
               >
@@ -123,12 +123,12 @@ export default function Playground() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Of typ je eigen vraag aan mij..."
-              className="flex-1 bg-foreground/5 border border-foreground/10 rounded-full px-5 py-3 text-sm text-foreground placeholder:text-muted/70 focus:border-accent-violet/60 transition-colors"
+              className="flex-1 bg-foreground/5 border border-foreground/10 rounded-full px-5 py-3 text-sm text-foreground placeholder:text-muted/70 focus:border-accent-500/60 transition-colors"
             />
             <button
               type="submit"
               aria-label="Verstuur vraag"
-              className="w-12 h-12 shrink-0 rounded-full bg-gradient-to-r from-accent-indigo to-accent-violet flex items-center justify-center text-on-accent hover:opacity-90 transition-opacity"
+              className="w-12 h-12 shrink-0 rounded-full bg-gradient-to-r from-accent-400 to-accent-500 flex items-center justify-center text-on-accent hover:opacity-90 transition-opacity"
             >
               <Send size={16} />
             </button>
@@ -153,7 +153,7 @@ export default function Playground() {
                   animate={{ opacity: 1 }}
                   className="flex flex-col items-center justify-center h-[140px] text-muted text-sm gap-2"
                 >
-                  <Sparkles size={20} className="text-accent-cyan" />
+                  <Sparkles size={20} className="text-accent-600" />
                   Kies hierboven een vraag om te beginnen
                 </motion.div>
               )}

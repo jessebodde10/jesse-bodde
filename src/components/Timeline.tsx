@@ -12,16 +12,16 @@ const categoryStyle: Record<
 > = {
   opleiding: {
     icon: GraduationCap,
-    color: "from-accent-cyan to-accent-indigo",
+    color: "from-accent-600 to-accent-400",
     ink: "text-on-accent",
   },
   werk: {
     icon: Briefcase,
-    color: "from-accent-indigo to-accent-violet",
+    color: "from-accent-400 to-accent-500",
     ink: "text-on-accent",
   },
-  ai: { icon: Bot, color: "from-accent-cyan to-accent-pink", ink: "text-white" },
-  toekomst: { icon: Flag, color: "from-accent-pink to-accent-cyan", ink: "text-white" },
+  ai: { icon: Bot, color: "from-accent-600 to-accent-700", ink: "text-white" },
+  toekomst: { icon: Flag, color: "from-accent-700 to-accent-600", ink: "text-white" },
 };
 
 export default function Timeline() {
@@ -34,7 +34,7 @@ export default function Timeline() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-sm font-medium text-accent-cyan tracking-wide uppercase mb-4">
+          <p className="text-sm font-medium text-accent-600 tracking-wide uppercase mb-4">
             Tijdlijn
           </p>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground leading-tight max-w-2xl">
@@ -49,7 +49,7 @@ export default function Timeline() {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             style={{ transformOrigin: "top" }}
-            className="absolute left-[19px] sm:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-accent-cyan via-accent-violet to-accent-pink opacity-40"
+            className="absolute left-[19px] sm:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-accent-600 via-accent-500 to-accent-700 opacity-40"
           />
 
           <div className="space-y-8">
@@ -77,7 +77,7 @@ export default function Timeline() {
 
                   <div className="glass glass-hover rounded-2xl p-5 sm:p-6">
                     <div className="flex flex-wrap items-center gap-2 mb-1.5">
-                      <span className="text-xs font-medium text-accent-cyan">{item.year}</span>
+                      <span className="text-xs font-medium text-accent-600">{item.year}</span>
                       {item.org && (
                         <>
                           <span className="text-muted text-xs">·</span>

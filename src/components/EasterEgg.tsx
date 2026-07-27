@@ -55,8 +55,8 @@ export default function EasterEgg() {
             <X size={16} />
           </button>
           <div className="flex items-center gap-2 mb-2">
-            <TerminalSquare size={16} className="text-accent-cyan" />
-            <span className="text-xs font-mono text-accent-cyan">easter_egg.found()</span>
+            <TerminalSquare size={16} className="text-accent-600" />
+            <span className="text-xs font-mono text-accent-600">easter_egg.found()</span>
           </div>
           <p className="text-sm text-foreground/85 leading-relaxed">
             Goed gezien. Als je code-shortcuts opmerkt, merk je ook procesoptimalisaties op,

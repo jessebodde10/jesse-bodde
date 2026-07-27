@@ -52,7 +52,7 @@ export default function Hero() {
       className="relative min-h-[100svh] flex items-center pt-28 pb-16 overflow-hidden"
     >
       <div
-        className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-accent-indigo via-accent-violet to-accent-pink bg-[length:200%_100%] accent-shimmer"
+        className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-accent-400 via-accent-500 to-accent-700 bg-[length:200%_100%] accent-shimmer"
         aria-hidden="true"
       />
 
@@ -105,7 +105,7 @@ export default function Hero() {
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => window.dispatchEvent(new Event("open-pitch"))}
-              className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-accent-indigo to-accent-violet text-on-accent font-medium text-sm sm:text-base hover:shadow-[0_0_40px_-10px_rgba(217,119,6,0.6)] transition-shadow"
+              className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-accent-400 to-accent-500 text-on-accent font-medium text-sm sm:text-base hover:shadow-[0_0_40px_-10px_rgba(217,119,6,0.6)] transition-shadow"
             >
               Waarom ik?
               <ArrowDown size={16} className="group-hover:translate-y-0.5 transition-transform" />
@@ -134,7 +134,7 @@ export default function Hero() {
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
               style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-              className="relative rounded-[2rem] overflow-hidden bg-gradient-to-br from-accent-indigo via-accent-violet to-accent-pink p-[3px]"
+              className="relative rounded-[2rem] overflow-hidden bg-gradient-to-br from-accent-400 via-accent-500 to-accent-700 p-[3px]"
             >
               <div className="relative rounded-[1.6rem] overflow-hidden aspect-[4/5]">
                 <Image

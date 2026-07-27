@@ -4,13 +4,10 @@ export const profile = {
   targetRole: "AI Trainee bij The Automation Group",
   tagline:
     "Ik bouw AI-agents en workflows die processen slimmer maken en wil dat leren op het hoogste niveau.",
-  location: "Rijswijk",
   email: "jessebodde@outlook.com",
-  phone: "+31 6 24 50 58 63",
   linkedin: "https://www.linkedin.com/in/jessebodde/",
   github: "", // nog niet aangeleverd, knop wordt verborgen totdat dit is ingevuld
   cvUrl: "/cv/Jesse-Bodde-CV.pdf",
-  applyUrl: "https://theautomationgroup.nl/nl/werken-bij/ai-trainees",
   companyName: "The Automation Group",
 };
 
@@ -297,10 +294,4 @@ export const whyTraineeship = {
     "Agentic engineering, context engineering, prompt-architectuur en evaluatie op productieniveau. Dat leer je niet uit een boek, dat leer je door het meteen te gebruiken zodra het uitkomt.",
   contribute:
     "Een niet-technische, klantgerichte blik gecombineerd met bewezen zelfstandige bouwervaring in AI-automatisering. Ik vertaal complexe systemen naar iets dat werkt voor de mensen die het écht gebruiken.",
-};
-
-export const easterEgg = {
-  trigger: "console",
-  message:
-    "Als je dit in de console leest: fijn dat je verder kijkt dan de pixels. Dat is precies de nieuwsgierigheid waar ik het over heb. Jesse",
 };

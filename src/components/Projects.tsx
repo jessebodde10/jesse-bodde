@@ -18,7 +18,7 @@ export default function Projects() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-sm font-medium text-accent-cyan tracking-wide uppercase mb-4">
+          <p className="text-sm font-medium text-accent-600 tracking-wide uppercase mb-4">
             Projecten
           </p>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground leading-tight max-w-2xl">
@@ -34,11 +34,11 @@ export default function Projects() {
             transition={{ duration: 0.6 }}
             className="mt-12 glass glass-hover rounded-3xl p-8 sm:p-10 relative overflow-hidden"
           >
-            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-accent-indigo via-accent-violet to-accent-pink bg-[length:200%_100%] accent-shimmer" />
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-accent-400 via-accent-500 to-accent-700 bg-[length:200%_100%] accent-shimmer" />
             <div className="relative grid lg:grid-cols-[1.2fr_1fr] gap-10">
               <div>
                 <div className="flex items-center gap-3 mb-4 flex-wrap">
-                  <span className="text-xs font-medium px-3 py-1 rounded-full bg-accent-indigo/20 text-accent-cyan border border-accent-indigo/30">
+                  <span className="text-xs font-medium px-3 py-1 rounded-full bg-accent-400/20 text-accent-600 border border-accent-400/30">
                     Uitgelicht project
                   </span>
                   <span className="text-xs text-muted">{featured.period}</span>
@@ -46,7 +46,7 @@ export default function Projects() {
                 <h3 className="text-2xl sm:text-3xl font-semibold text-foreground mb-2">
                   {featured.title}
                 </h3>
-                <p className="text-accent-cyan text-sm sm:text-base mb-6">{featured.tagline}</p>
+                <p className="text-accent-600 text-sm sm:text-base mb-6">{featured.tagline}</p>
 
                 <div className="space-y-4">
                   <div>
@@ -71,7 +71,7 @@ export default function Projects() {
                       href={featured.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent-indigo to-accent-violet text-on-accent text-sm font-medium hover:opacity-90 transition-opacity"
+                      className="inline-flex items-center gap-2 min-h-11 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent-400 to-accent-500 text-on-accent text-sm font-medium hover:opacity-90 transition-opacity"
                     >
                       Live bekijken <ExternalLink size={15} />
                     </motion.a>
@@ -83,7 +83,7 @@ export default function Projects() {
                       href={featured.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass text-foreground text-sm font-medium"
+                      className="inline-flex items-center gap-2 min-h-11 px-5 py-2.5 rounded-full glass text-foreground text-sm font-medium"
                     >
                       <GithubIcon size={15} /> GitHub
                     </motion.a>
@@ -128,7 +128,7 @@ export default function Projects() {
                 />
               </div>
               <p className="text-xs text-muted mb-4">{p.period}</p>
-              <p className="text-sm text-accent-cyan mb-4">{p.tagline}</p>
+              <p className="text-sm text-accent-600 mb-4">{p.tagline}</p>
 
               <div className="space-y-3 flex-1">
                 <p className="text-xs text-muted leading-relaxed">

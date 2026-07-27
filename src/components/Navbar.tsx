@@ -51,7 +51,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             href="#top"
-            className="font-display text-sm sm:text-base font-semibold tracking-tight text-foreground"
+            className="inline-flex items-center min-h-11 font-display text-sm sm:text-base font-semibold tracking-tight text-foreground"
           >
             Jesse<span className="text-gradient">.dev</span>
           </motion.a>
@@ -74,7 +74,7 @@ export default function Navbar() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href="#contact"
-              className="text-sm font-medium px-4 py-2 rounded-full bg-gradient-to-r from-accent-indigo to-accent-violet text-on-accent hover:opacity-90 transition-opacity"
+              className="text-sm font-medium px-4 py-2 rounded-full bg-gradient-to-r from-accent-400 to-accent-500 text-on-accent hover:opacity-90 transition-opacity"
             >
               Neem contact op
             </motion.a>
@@ -82,7 +82,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setOpen(!open)}
-            className="lg:hidden text-foreground p-2"
+            className="lg:hidden text-foreground p-2 min-w-11 min-h-11 flex items-center justify-center"
             aria-label="Menu"
           >
             {open ? <X size={22} /> : <Menu size={22} />}
@@ -110,7 +110,7 @@ export default function Navbar() {
                 ))}
                 <a
                   href={profile.cvUrl}
-                  className="mt-1 px-4 py-3 text-sm font-medium text-center rounded-lg bg-gradient-to-r from-accent-indigo to-accent-violet text-on-accent"
+                  className="mt-1 px-4 py-3 text-sm font-medium text-center rounded-lg bg-gradient-to-r from-accent-400 to-accent-500 text-on-accent"
                 >
                   Download CV
                 </a>

@@ -38,7 +38,7 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="max-w-3xl"
         >
-          <p className="text-sm font-medium text-accent-cyan tracking-wide uppercase mb-4">
+          <p className="text-sm font-medium text-accent-600 tracking-wide uppercase mb-4">
             Over mij
           </p>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
@@ -67,7 +67,7 @@ export default function About() {
               <motion.div
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                className="w-11 h-11 rounded-xl bg-gradient-to-br from-accent-indigo to-accent-violet flex items-center justify-center mb-5"
+                className="w-11 h-11 rounded-xl bg-gradient-to-br from-accent-400 to-accent-500 flex items-center justify-center mb-5"
               >
                 <c.icon size={20} className="text-on-accent" />
               </motion.div>
@@ -97,7 +97,7 @@ export default function About() {
             <motion.div
               whileHover={{ scale: 1.1, rotate: 5 }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
-              className="w-11 h-11 rounded-xl bg-gradient-to-br from-accent-indigo to-accent-violet flex items-center justify-center mb-5"
+              className="w-11 h-11 rounded-xl bg-gradient-to-br from-accent-400 to-accent-500 flex items-center justify-center mb-5"
             >
               <Medal size={20} className="text-on-accent" />
             </motion.div>

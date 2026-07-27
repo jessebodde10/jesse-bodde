@@ -61,13 +61,13 @@ export default function PitchModal() {
               initial={{ scale: 0, rotate: -20 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ type: "spring", stiffness: 260, damping: 15, delay: 0.15 }}
-              className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent-indigo to-accent-violet flex items-center justify-center mb-5"
+              className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent-400 to-accent-500 flex items-center justify-center mb-5"
             >
               <Zap size={22} className="text-on-accent" />
             </motion.div>
 
             <h3 className="text-2xl font-semibold text-foreground mb-1">{pitch.question}</h3>
-            <p className="text-xs text-accent-cyan mb-5">De overtuigende versie</p>
+            <p className="text-xs text-accent-600 mb-5">De overtuigende versie</p>
             <p className="text-sm sm:text-base text-foreground/85 leading-relaxed">{pitch.answer}</p>
 
             <motion.a
@@ -75,7 +75,7 @@ export default function PitchModal() {
               whileTap={{ scale: 0.97 }}
               href="#contact"
               onClick={() => setOpen(false)}
-              className="mt-7 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-accent-indigo to-accent-violet text-on-accent text-sm font-medium hover:opacity-90 transition-opacity"
+              className="mt-7 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-accent-400 to-accent-500 text-on-accent text-sm font-medium hover:opacity-90 transition-opacity"
             >
               Laten we praten
             </motion.a>
