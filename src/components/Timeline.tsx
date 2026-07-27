@@ -4,14 +4,24 @@ import { motion } from "framer-motion";
 import { GraduationCap, Briefcase, Bot, Flag } from "lucide-react";
 import { timeline, type TimelineItem } from "@/lib/data";
 
+/* Icon colour follows the badge's darkest stop: dark ink on the light amber
+   pair, white on the deep amber pair. Both stay above 3:1. */
 const categoryStyle: Record<
   TimelineItem["category"],
-  { icon: typeof GraduationCap; color: string }
+  { icon: typeof GraduationCap; color: string; ink: string }
 > = {
-  opleiding: { icon: GraduationCap, color: "from-accent-cyan to-accent-indigo" },
-  werk: { icon: Briefcase, color: "from-accent-indigo to-accent-violet" },
-  ai: { icon: Bot, color: "from-accent-violet to-accent-pink" },
-  toekomst: { icon: Flag, color: "from-accent-pink to-accent-cyan" },
+  opleiding: {
+    icon: GraduationCap,
+    color: "from-accent-cyan to-accent-indigo",
+    ink: "text-on-accent",
+  },
+  werk: {
+    icon: Briefcase,
+    color: "from-accent-indigo to-accent-violet",
+    ink: "text-on-accent",
+  },
+  ai: { icon: Bot, color: "from-accent-cyan to-accent-pink", ink: "text-white" },
+  toekomst: { icon: Flag, color: "from-accent-pink to-accent-cyan", ink: "text-white" },
 };
 
 export default function Timeline() {
@@ -62,7 +72,7 @@ export default function Timeline() {
                     transition={{ type: "spring", stiffness: 260, damping: 15, delay: i * 0.04 + 0.15 }}
                     className={`absolute left-0 sm:left-0 top-0 w-10 h-10 rounded-full bg-gradient-to-br ${style.color} flex items-center justify-center shadow-lg`}
                   >
-                    <style.icon size={16} className="text-on-accent" />
+                    <style.icon size={16} className={style.ink} />
                   </motion.div>
 
                   <div className="glass glass-hover rounded-2xl p-5 sm:p-6">

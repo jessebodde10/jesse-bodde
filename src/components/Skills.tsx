@@ -1,11 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence, animate } from "framer-motion";
+import { motion, AnimatePresence, animate, useReducedMotion } from "framer-motion";
 import { skills, skillGroups } from "@/lib/data";
 
 function CountUp({ value }: { value: number }) {
-  const [display, setDisplay] = useState(0);
+  const reduceMotion = useReducedMotion();
+  const [display, setDisplay] = useState(reduceMotion ? value : 0);
+
+  if (reduceMotion) return <span>{value}%</span>;
 
   return (
     <motion.span

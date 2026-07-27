@@ -105,7 +105,7 @@ export default function Hero() {
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => window.dispatchEvent(new Event("open-pitch"))}
-              className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-accent-indigo via-accent-violet to-accent-pink text-on-accent font-medium text-sm sm:text-base hover:shadow-[0_0_40px_-10px_rgba(217,119,6,0.6)] transition-shadow"
+              className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-accent-indigo to-accent-violet text-on-accent font-medium text-sm sm:text-base hover:shadow-[0_0_40px_-10px_rgba(217,119,6,0.6)] transition-shadow"
             >
               Waarom ik?
               <ArrowDown size={16} className="group-hover:translate-y-0.5 transition-transform" />

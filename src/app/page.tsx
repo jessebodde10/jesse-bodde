@@ -10,10 +10,11 @@ import Playground from "@/components/Playground";
 import Contact from "@/components/Contact";
 import PitchModal from "@/components/PitchModal";
 import EasterEgg from "@/components/EasterEgg";
+import MotionProvider from "@/components/MotionProvider";
 
 export default function Home() {
   return (
-    <>
+    <MotionProvider>
       <ProgressBar />
       <Navbar />
       <main className="flex-1">
@@ -28,6 +29,6 @@ export default function Home() {
       </main>
       <PitchModal />
       <EasterEgg />
-    </>
+    </MotionProvider>
   );
 }

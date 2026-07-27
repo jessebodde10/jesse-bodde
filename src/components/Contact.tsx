@@ -39,7 +39,7 @@ export default function Contact() {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => window.dispatchEvent(new Event("open-pitch"))}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-accent-indigo via-accent-violet to-accent-pink text-on-accent text-sm sm:text-base font-medium hover:shadow-[0_0_40px_-10px_rgba(217,119,6,0.6)] transition-shadow"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-accent-indigo to-accent-violet text-on-accent text-sm sm:text-base font-medium hover:shadow-[0_0_40px_-10px_rgba(217,119,6,0.6)] transition-shadow"
               >
                 <motion.span
                   animate={{ rotate: [0, -12, 12, 0] }}

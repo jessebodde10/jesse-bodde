@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Send, Sparkles } from "lucide-react";
 import { playgroundQA, type PlaygroundQA } from "@/lib/data";
 
@@ -23,17 +23,22 @@ function score(question: string, input: string) {
 }
 
 function Typewriter({ text }: { text: string }) {
-  const [shown, setShown] = useState("");
+  const reduceMotion = useReducedMotion();
+  const [typed, setTyped] = useState("");
 
   useEffect(() => {
+    if (reduceMotion) return;
     let i = 0;
     const id = setInterval(() => {
       i += 2;
-      setShown(text.slice(0, i));
+      setTyped(text.slice(0, i));
       if (i >= text.length) clearInterval(id);
     }, 12);
     return () => clearInterval(id);
-  }, [text]);
+  }, [text, reduceMotion]);
+
+  // Reduced motion gets the full answer at once, no typing.
+  const shown = reduceMotion ? text : typed;
 
   return <p className="text-sm sm:text-base text-foreground/85 leading-relaxed">{shown}</p>;
 }
@@ -118,7 +123,7 @@ export default function Playground() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Of typ je eigen vraag aan mij..."
-              className="flex-1 bg-foreground/5 border border-foreground/10 rounded-full px-5 py-3 text-sm text-foreground placeholder:text-muted/70 focus:outline-none focus:border-accent-violet/60 transition-colors"
+              className="flex-1 bg-foreground/5 border border-foreground/10 rounded-full px-5 py-3 text-sm text-foreground placeholder:text-muted/70 focus:border-accent-violet/60 transition-colors"
             />
             <button
               type="submit"

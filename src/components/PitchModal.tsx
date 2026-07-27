@@ -61,7 +61,7 @@ export default function PitchModal() {
               initial={{ scale: 0, rotate: -20 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ type: "spring", stiffness: 260, damping: 15, delay: 0.15 }}
-              className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent-indigo to-accent-pink flex items-center justify-center mb-5"
+              className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent-indigo to-accent-violet flex items-center justify-center mb-5"
             >
               <Zap size={22} className="text-on-accent" />
             </motion.div>
