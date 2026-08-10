@@ -1,124 +1,132 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence, useScroll } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { profile } from "@/lib/data";
 
 const links = [
-  { href: "#about", label: "Over mij" },
-  { href: "#skills", label: "Vaardigheden" },
-  { href: "#projects", label: "Projecten" },
-  { href: "#why", label: "Waarom dit traineeship" },
-  { href: "#timeline", label: "Tijdlijn" },
-  { href: "#playground", label: "AI Playground" },
+  { href: "#over-mij", label: "Over mij" },
+  { href: "#projecten", label: "Projecten" },
+  { href: "#ervaring", label: "Ervaring" },
+  { href: "#vaardigheden", label: "Vaardigheden" },
+  { href: "#documenten", label: "Documenten" },
   { href: "#contact", label: "Contact" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const { scrollYProgress } = useScroll();
+  const [active, setActive] = useState("");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Marks the section currently crossing the upper third of the viewport.
   useEffect(() => {
-    return scrollYProgress.on("change", (v) => setProgress(Math.round(v * 100)));
-  }, [scrollYProgress]);
+    const sections = links
+      .map((l) => document.querySelector(l.href))
+      .filter((el): el is Element => el !== null);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+        if (visible) setActive(`#${visible.target.id}`);
+      },
+      { rootMargin: "-20% 0px -70% 0px" }
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "py-3" : "py-5"
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+        scrolled
+          ? "bg-background/90 backdrop-blur-sm border-b border-rule"
+          : "bg-transparent border-b border-transparent"
       }`}
     >
-      <div
-        className={`mx-auto max-w-6xl px-4 sm:px-6 transition-all duration-300 ${
-          scrolled ? "max-w-5xl" : "max-w-6xl"
-        }`}
-      >
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div
-          className={`flex items-center justify-between rounded-2xl px-4 sm:px-5 py-3 transition-all duration-300 ${
-            scrolled ? "glass shadow-lg shadow-black/10" : "bg-transparent"
+          className={`flex items-center justify-between transition-all duration-300 ${
+            scrolled ? "h-14" : "h-20"
           }`}
         >
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <a
             href="#top"
-            className="inline-flex items-center min-h-11 font-display text-sm sm:text-base font-semibold tracking-tight text-foreground"
+            className="font-display text-lg sm:text-xl inline-flex items-center min-h-11 text-foreground"
           >
-            Jesse<span className="text-gradient">.dev</span>
-          </motion.a>
+            {profile.name}
+          </a>
 
-          <nav className="hidden lg:flex items-center gap-1">
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="px-3 py-2 text-sm text-muted hover:text-foreground transition-colors rounded-lg hover:bg-foreground/5"
-              >
-                {l.label}
-              </a>
-            ))}
+          <nav className="hidden lg:flex items-center gap-7" aria-label="Hoofdnavigatie">
+            {links.map((l) => {
+              const isActive = active === l.href;
+              return (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`relative inline-flex items-center min-h-11 text-sm transition-colors ${
+                    isActive ? "text-foreground" : "text-muted hover:text-foreground"
+                  }`}
+                >
+                  {l.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active"
+                      className="absolute left-0 right-0 bottom-2.5 h-px bg-accent-600"
+                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    />
+                  )}
+                </a>
+              );
+            })}
           </nav>
-
-          <div className="hidden lg:flex items-center gap-3">
-            <span className="text-xs text-muted tabular-nums w-9">{progress}%</span>
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href="#contact"
-              className="text-sm font-medium px-4 py-2 rounded-full bg-gradient-to-r from-accent-400 to-accent-500 text-on-accent hover:opacity-90 transition-opacity"
-            >
-              Neem contact op
-            </motion.a>
-          </div>
 
           <button
             onClick={() => setOpen(!open)}
-            className="lg:hidden text-foreground p-2 min-w-11 min-h-11 flex items-center justify-center"
-            aria-label="Menu"
+            className="lg:hidden -mr-2 min-w-11 min-h-11 flex items-center justify-center text-foreground"
+            aria-label={open ? "Menu sluiten" : "Menu openen"}
+            aria-expanded={open}
           >
-            {open ? <X size={22} /> : <Menu size={22} />}
+            {open ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
-
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden overflow-hidden mt-2 glass rounded-2xl"
-            >
-              <nav className="flex flex-col p-2">
-                {links.map((l) => (
-                  <a
-                    key={l.href}
-                    href={l.href}
-                    onClick={() => setOpen(false)}
-                    className="px-4 py-3 text-sm text-muted hover:text-foreground transition-colors rounded-lg hover:bg-foreground/5"
-                  >
-                    {l.label}
-                  </a>
-                ))}
-                <a
-                  href={profile.cvUrl}
-                  className="mt-1 px-4 py-3 text-sm font-medium text-center rounded-lg bg-gradient-to-r from-accent-400 to-accent-500 text-on-accent"
-                >
-                  Download CV
-                </a>
-              </nav>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:hidden overflow-hidden bg-background border-b border-rule"
+          >
+            <nav className="mx-auto max-w-6xl px-5 py-2" aria-label="Mobiele navigatie">
+              {links.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="flex items-center min-h-12 text-base text-foreground border-b border-rule last:border-0"
+                >
+                  {l.label}
+                </a>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

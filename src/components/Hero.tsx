@@ -4,178 +4,158 @@ import { useRef } from "react";
 import Image from "next/image";
 import {
   motion,
-  useMotionValue,
-  useSpring,
+  useScroll,
   useTransform,
+  useReducedMotion,
   type Variants,
 } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowRight, FileDown } from "lucide-react";
 import { profile } from "@/lib/data";
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
+const rise: Variants = {
+  hidden: { opacity: 0, y: 18 },
   show: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: 0.1 + i * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
+    transition: { delay: 0.08 + i * 0.09, duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
   }),
 };
 
 export default function Hero() {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [8, -8]), {
-    stiffness: 150,
-    damping: 15,
-  });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), {
-    stiffness: 150,
-    damping: 15,
-  });
+  const sectionRef = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = cardRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
-    mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  // Portrait drifts a little slower than the page. Disabled outright under
+  // reduced motion, since scroll-linked movement is the kind that causes
+  // discomfort.
+  const portraitY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
 
   return (
     <section
       id="top"
-      className="relative min-h-[100svh] flex items-center pt-28 pb-16 overflow-hidden"
+      ref={sectionRef}
+      className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28"
     >
-      <div
-        className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-accent-400 via-accent-500 to-accent-700 bg-[length:200%_100%] accent-shimmer"
-        aria-hidden="true"
-      />
-
-      <div
-        className="bg-glow animate-glow animate-drift w-[560px] h-[560px] -top-40 left-1/2 -translate-x-1/2"
-        aria-hidden="true"
-      />
-
-      <div className="relative mx-auto max-w-6xl px-6 w-full grid lg:grid-cols-[1.15fr_0.85fr] gap-14 items-center">
-        <div>
-          <motion.h1
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            custom={0}
-            className="font-display text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight text-foreground leading-[1.02]"
-          >
-            {profile.name}
-          </motion.h1>
-
-          <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            custom={1}
-            className="mt-5 text-lg sm:text-xl text-gradient font-medium"
-          >
-            {profile.title}
-          </motion.p>
-
-          <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            custom={2}
-            className="mt-6 max-w-xl text-base sm:text-lg text-muted leading-relaxed"
-          >
-            {profile.tagline} Deze site is mijn motivatiebrief, alleen dan als werkend
-            voorbeeld van hoe ik denk, bouw en leer.
-          </motion.p>
-
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            custom={3}
-            className="mt-9 flex flex-wrap items-center gap-4"
-          >
-            <motion.button
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={() => window.dispatchEvent(new Event("open-pitch"))}
-              className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-accent-400 to-accent-500 text-on-accent font-medium text-sm sm:text-base hover:shadow-[0_0_40px_-10px_rgba(217,119,6,0.6)] transition-shadow"
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <div className="grid lg:grid-cols-[1.05fr_0.75fr] gap-14 lg:gap-20 items-center">
+          <div>
+            <motion.p
+              variants={rise}
+              initial="hidden"
+              animate="show"
+              custom={0}
+              className="eyebrow"
             >
-              Waarom ik?
-              <ArrowDown size={16} className="group-hover:translate-y-0.5 transition-transform" />
-            </motion.button>
-            <motion.a
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              href="#projects"
-              className="px-6 py-3.5 rounded-full glass glass-hover text-foreground text-sm sm:text-base font-medium"
-            >
-              Bekijk mijn werk
-            </motion.a>
-          </motion.div>
-        </div>
+              Portfolio
+            </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mx-auto w-64 sm:w-80 lg:w-full max-w-sm"
-          style={{ perspective: 1000 }}
-        >
-          <div className="animate-float-soft">
+            <motion.h1
+              variants={rise}
+              initial="hidden"
+              animate="show"
+              custom={1}
+              className="font-display mt-5 text-[3.25rem] sm:text-7xl lg:text-[5.5rem] leading-[0.95] text-foreground"
+            >
+              {profile.name}
+            </motion.h1>
+
+            <motion.p
+              variants={rise}
+              initial="hidden"
+              animate="show"
+              custom={2}
+              className="mt-6 max-w-lg text-lg sm:text-xl leading-snug text-accent-700"
+            >
+              {profile.role}
+            </motion.p>
+
+            <motion.p
+              variants={rise}
+              initial="hidden"
+              animate="show"
+              custom={3}
+              className="mt-7 max-w-xl text-base sm:text-lg leading-relaxed text-muted"
+            >
+              {profile.intro}
+            </motion.p>
+
             <motion.div
-              ref={cardRef}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-              className="relative rounded-[2rem] overflow-hidden bg-gradient-to-br from-accent-400 via-accent-500 to-accent-700 p-[3px]"
+              variants={rise}
+              initial="hidden"
+              animate="show"
+              custom={4}
+              className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-4"
             >
-              <div className="relative rounded-[1.6rem] overflow-hidden aspect-[4/5]">
-                <Image
-                  src="/images/jesse-bodde.png"
-                  alt={`Portretfoto van ${profile.name}`}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 320px, 400px"
-                  className="object-cover"
+              <a
+                href="#projecten"
+                className="group inline-flex items-center gap-2 min-h-11 px-6 py-3 rounded bg-accent-600 text-white text-sm font-medium transition-colors hover:bg-accent-700"
+              >
+                Bekijk mijn projecten
+                <ArrowRight
+                  size={16}
+                  className="transition-transform duration-300 group-hover:translate-x-0.5"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent" />
-              </div>
+              </a>
+              <a
+                href={profile.cvUrl}
+                download
+                className="inline-flex items-center gap-2 min-h-11 px-6 py-3 rounded border border-border text-foreground text-sm font-medium transition-colors hover:border-accent-600"
+              >
+                <FileDown size={16} />
+                Download mijn cv
+              </a>
+              <a
+                href="#contact"
+                className="link-underline inline-flex items-center min-h-11 px-1 text-sm text-muted transition-colors hover:text-foreground"
+              >
+                Neem contact op
+              </a>
             </motion.div>
           </div>
+
           <motion.div
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.9, duration: 0.6 }}
-            className="absolute -bottom-5 -left-5 glass rounded-2xl px-4 py-3 shadow-xl"
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.25, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="relative order-first lg:order-none mx-auto w-56 sm:w-72 lg:w-full"
           >
-            <p className="text-xs text-muted">Solliciteert op</p>
-            <p className="text-sm font-medium text-foreground">{profile.targetRole}</p>
+            {/* Offset rule behind the portrait: an editorial frame, not a glow. */}
+            <div
+              className="absolute -left-3 -bottom-3 h-full w-full border-l border-b border-accent-600/40"
+              aria-hidden="true"
+            />
+            <div className="relative aspect-4/5 overflow-hidden bg-surface">
+              <motion.div
+                style={reduceMotion ? undefined : { y: portraitY }}
+                className="absolute inset-0 -bottom-[12%]"
+              >
+                <Image
+                  src="/images/jesse-bodde.png"
+                  alt="Portretfoto van Jesse Bodde"
+                  fill
+                  priority
+                  sizes="(max-width: 640px) 224px, (max-width: 1024px) 288px, 420px"
+                  className="object-cover object-top"
+                />
+              </motion.div>
+            </div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
 
       <motion.a
-        href="#about"
+        href="#over-mij"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-        className="hidden sm:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-muted hover:text-foreground transition-colors"
-        aria-label="Scroll naar volgende sectie"
+        transition={{ delay: 1, duration: 0.6 }}
+        className="mt-20 mx-auto hidden w-fit items-center gap-2 text-xs text-muted transition-colors hover:text-foreground lg:flex"
       >
-        <span className="text-xs">Scroll</span>
-        <motion.span
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ArrowDown size={16} />
-        </motion.span>
+        <ArrowDown size={14} />
+        Verder lezen
       </motion.a>
     </section>
   );

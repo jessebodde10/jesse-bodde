@@ -1,33 +1,47 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Instrument_Serif, Inter, Geist_Mono } from "next/font/google";
 import { profile } from "@/lib/data";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const serifDisplay = Instrument_Serif({
+  variable: "--font-serif-display",
+  weight: "400",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const sansBody = Inter({
+  variable: "--font-sans-body",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const title = `${profile.name}, ${profile.title}`;
+const title = "Jesse Bodde | Portfolio, AI-automatisering & procesverbetering";
 const description =
-  "Interactieve motivatie-website van Jesse Bodde voor het AI Traineeship bij The Automation Group: een werkend voorbeeld van AI-automatisering, agentic workflows en denkkracht in plaats van een standaard motivatiebrief.";
+  "Portfolio van Jesse Bodde: ervaring in AI-automatisering, procesverbetering, ondernemerschap, customer success en logistiek.";
 
 export const metadata: Metadata = {
-  title,
+  title: {
+    default: title,
+    template: "%s | Jesse Bodde",
+  },
   description,
   keywords: [
     "Jesse Bodde",
-    "AI Trainee",
-    "AI Engineer",
-    "Agentic Engineering",
-    "The Automation Group",
-    "n8n automatisering",
-    "AI automation portfolio",
+    "portfolio",
+    "AI-automatisering",
+    "procesverbetering",
+    "n8n",
+    "workflow automatisering",
+    "customer success",
+    "logistiek en douane",
+    "ondernemerschap",
   ],
   authors: [{ name: profile.name }],
   openGraph: {
@@ -35,6 +49,7 @@ export const metadata: Metadata = {
     description,
     type: "profile",
     locale: "nl_NL",
+    siteName: `${profile.name} Portfolio`,
   },
   twitter: {
     card: "summary_large_image",
@@ -56,7 +71,7 @@ export default function RootLayout({
     <html
       lang="nl"
       data-scroll-behavior="smooth"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${serifDisplay.variable} ${sansBody.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}

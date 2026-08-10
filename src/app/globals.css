@@ -1,14 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f6f5f2;
-  --foreground: #16171f;
-  --border: rgba(22, 23, 31, 0.09);
+  /* Warm paper, not the blue-grey every dashboard template ships with. */
+  --background: #faf9f6;
+  --surface: #ffffff;
+  --foreground: #151821;
+  --muted: #585c69;
+
+  --border: rgba(21, 24, 33, 0.12);
+  --rule: rgba(21, 24, 33, 0.08);
 
   /* One amber ramp, light to dark. Higher number = darker.
-     Contrast against the page background (#f6f5f2):
-       400 1.87  |  500 2.92  |  600 4.61  |  700 6.50
-     So 400 and 500 are fill-only; text needs 600 or darker. */
+     Contrast against the page background (#faf9f6):
+       400 1.91  |  500 2.98  |  600 4.71  |  700 6.64
+     So 400 and 500 are fill-only; text and icons need 600 or darker. */
   --accent-400: #f5a524;
   --accent-500: #d97706;
   --accent-600: #b45309;
@@ -16,40 +21,44 @@
 
   /* Ink for text and icons sitting on a 400/500 fill. */
   --on-accent: #1a1206;
-  --muted: #5b5f6b;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
   --color-border: var(--border);
+  --color-rule: var(--rule);
   --color-accent-400: var(--accent-400);
   --color-accent-500: var(--accent-500);
   --color-accent-600: var(--accent-600);
   --color-accent-700: var(--accent-700);
   --color-on-accent: var(--on-accent);
-  --color-muted: var(--muted);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-sans-body);
+  --font-serif: var(--font-serif-display);
   --font-mono: var(--font-geist-mono);
 }
 
-* {
+html {
   scroll-behavior: smooth;
-}
-
-/* Visible on every focusable element, on both light panels and amber buttons.
-   The offset keeps the ring on the page background, where it reads at 16:1. */
-:focus-visible {
-  outline: 2px solid var(--foreground);
-  outline-offset: 2px;
-  border-radius: 4px;
+  /* Anchors land below the fixed header instead of under it. */
+  scroll-padding-top: 6rem;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans-body), system-ui, sans-serif;
   overflow-x: hidden;
+}
+
+/* Visible on every focusable element, on both paper and amber fills.
+   The offset keeps the ring on the background, where it reads at 16:1. */
+:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 2px;
+  border-radius: 3px;
 }
 
 ::selection {
@@ -57,128 +66,46 @@ body {
   color: var(--on-accent);
 }
 
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(var(--accent-400), var(--accent-500));
-  border-radius: 999px;
-}
-
-/* Stays within the two darkest amber stops so gradient text keeps 4.6:1 or
-   better on the light background. The lighter stops are for fills only. */
-.text-gradient {
-  background: linear-gradient(
-    100deg,
-    var(--accent-700),
-    var(--accent-600) 55%,
-    var(--accent-700)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.glass {
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid var(--border);
-  /* Prefixed first: the minifier drops whichever declaration comes first when
-     both are present, and Chrome does not support -webkit-backdrop-filter. */
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 1px 2px rgba(22, 23, 31, 0.04);
-}
-
-.glass-hover {
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease,
-    box-shadow 0.35s ease;
-}
-.glass-hover:hover {
-  transform: translateY(-4px);
-  border-color: rgba(217, 119, 6, 0.4);
-  box-shadow: 0 20px 50px -22px rgba(180, 83, 9, 0.35);
-}
-
+/* Display face for headings only. Body copy stays sans for readability. */
 .font-display {
-  letter-spacing: -0.03em;
+  font-family: var(--font-serif-display), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.015em;
 }
 
-.bg-glow {
-  position: absolute;
-  border-radius: 9999px;
-  background: radial-gradient(
-    circle,
-    rgba(245, 165, 36, 0.35) 0%,
-    rgba(217, 119, 6, 0.16) 45%,
-    transparent 72%
-  );
-  filter: blur(40px);
-  pointer-events: none;
+/* Small caps label above a section heading. */
+.eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-700);
 }
 
-@keyframes glow-breathe {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.08); }
-}
-.animate-glow {
-  animation: glow-breathe 7s ease-in-out infinite;
+/* Flat panel: hairline border on white, no blur, no lift-on-hover by default. */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
 }
 
-@keyframes drift {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(2%, -3%); }
+/* Underline that draws in from the left on hover. Transform only. */
+.link-underline {
+  background-image: linear-gradient(var(--accent-600), var(--accent-600));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.animate-drift {
-  animation: drift 12s ease-in-out infinite;
-}
-
-@keyframes shimmer-line {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-.accent-shimmer {
-  background-size: 200% 100%;
-  animation: shimmer-line 3.5s linear infinite;
+.link-underline:hover,
+.link-underline:focus-visible {
+  background-size: 100% 1px;
 }
 
-@keyframes float-soft {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-.animate-float-soft {
-  animation: float-soft 5s ease-in-out infinite;
-}
-
-/* Reduced motion: stop the ambient loops that never end, and land every
-   decorative element on its resting state. Hover and focus feedback stay,
-   they just arrive without travel. */
 @media (prefers-reduced-motion: reduce) {
-  * {
+  html {
     scroll-behavior: auto;
   }
 
-  .animate-glow,
-  .animate-drift,
-  .animate-float-soft,
-  .accent-shimmer {
-    animation: none;
-  }
-
-  .bg-glow {
-    opacity: 0.5;
-  }
-
-  .accent-shimmer {
-    background-position: 0 0;
-  }
-
-  .glass-hover {
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  }
-  .glass-hover:hover {
-    transform: none;
+  .link-underline {
+    transition: none;
   }
 }
