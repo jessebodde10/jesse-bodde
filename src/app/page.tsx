@@ -67,7 +67,7 @@ export default function HomePage() {
                   delay={BLUR_DELAY}
                   className="text-3xl font-bold tracking-tighter sm:text-4xl xl:text-5xl/none"
                   yOffset={8}
-                  text="Hallo, ik ben Jesse"
+                  text="Hey, ik ben Jesse"
                   animateByCharacter
                 />
                 <BlurFadeText
