@@ -142,16 +142,6 @@ export const education: ExperienceItem[] = [
   },
 ];
 
-export const ownProjects: ExperienceItem[] = [
-  {
-    period: "Mei 2026 – heden",
-    title: "Leadz Systems",
-    org: "Eigen praktijk",
-    description:
-      "AI-workflows en automatiseringen voor kleine ondernemers, gebouwd met n8n, Claude Code, ChatGPT, Gemini en API-koppelingen.",
-  },
-];
-
 export const experienceOutlook =
   "Mijn volgende stap is een rol waarin ik proceskennis, klantcontact en AI-automatisering verder kan combineren en verdiepen.";
 

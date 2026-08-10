@@ -28,7 +28,8 @@ export function ThemeToggle() {
   const toggle = () => {
     const next = !isDark();
     document.documentElement.classList.toggle("dark", next);
-    localStorage.setItem("preview-theme", next ? "dark" : "light");
+    // Key must match the pre-paint script in the root layout.
+    localStorage.setItem("theme", next ? "dark" : "light");
   };
 
   return (

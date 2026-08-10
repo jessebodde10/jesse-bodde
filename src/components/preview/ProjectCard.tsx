@@ -48,7 +48,7 @@ export function ProjectCard({
         <time className="font-sans text-xs text-neutral-500 dark:text-neutral-400">
           {period}
         </time>
-        <p className="prose mt-2 max-w-full text-pretty font-sans text-xs text-neutral-600 dark:text-neutral-400">
+        <p className="mt-2 max-w-full text-pretty font-sans text-xs text-neutral-600 dark:text-neutral-400">
           {description}
         </p>
       </div>
@@ -67,9 +67,11 @@ export function ProjectCard({
               href={liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 rounded-md bg-neutral-900 px-2 py-1 text-[10px] font-medium text-white transition-opacity hover:opacity-85 dark:bg-neutral-100 dark:text-neutral-900"
+              // min-h-11 keeps this comfortably tappable; the label itself stays
+              // small so the card does not turn into a button.
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-md bg-neutral-900 px-3 text-xs font-medium text-white transition-opacity hover:opacity-85 dark:bg-neutral-100 dark:text-neutral-900"
             >
-              <Globe size={10} />
+              <Globe size={12} />
               Website
             </a>
           </div>

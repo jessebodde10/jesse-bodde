@@ -1,14 +1,8 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Inter, Geist_Mono } from "next/font/google";
+import { Inter, Geist_Mono } from "next/font/google";
+import MotionProvider from "@/components/MotionProvider";
 import { profile } from "@/lib/data";
 import "./globals.css";
-
-const serifDisplay = Instrument_Serif({
-  variable: "--font-serif-display",
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 const sansBody = Inter({
   variable: "--font-sans-body",
@@ -71,10 +65,10 @@ export default function RootLayout({
     <html
       lang="nl"
       data-scroll-behavior="smooth"
-      /* The /voorbeeld theme script sets the `dark` class before hydration, so
-         the class list legitimately differs from the server render. */
+      /* The theme script below sets the `dark` class before hydration, so the
+         class list legitimately differs from the server render. */
       suppressHydrationWarning
-      className={`${serifDisplay.variable} ${sansBody.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${sansBody.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
         {/* Scroll reveals render as inline opacity:0 in the server HTML. If the
@@ -83,9 +77,16 @@ export default function RootLayout({
         <noscript>
           <style>{`[data-reveal]{opacity:1!important;transform:none!important;filter:none!important}`}</style>
         </noscript>
+        {/* Applies the stored theme before first paint so the page does not
+            flash light before switching to dark. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var s=localStorage.getItem("theme");var d=s==="dark"||(s===null&&matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.classList.toggle("dark",d)}catch(e){}})()`,
+          }}
+        />
       </head>
-      <body className="min-h-full flex flex-col bg-background text-foreground">
-        {children}
+      <body className="min-h-full flex flex-col bg-white font-sans text-neutral-900 dark:bg-neutral-950 dark:text-neutral-50">
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );

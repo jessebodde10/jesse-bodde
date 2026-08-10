@@ -1,114 +1,45 @@
 @import "tailwindcss";
 
-/* Class-based dark mode, used by the /voorbeeld preview's theme toggle. */
+/* Class-based dark mode, driven by the theme toggle in the dock. */
 @custom-variant dark (&:where(.dark, .dark *));
 
-:root {
-  /* Warm paper, not the blue-grey every dashboard template ships with. */
-  --background: #faf9f6;
-  --surface: #ffffff;
-  --foreground: #151821;
-  --muted: #585c69;
-
-  --border: rgba(21, 24, 33, 0.12);
-  --rule: rgba(21, 24, 33, 0.08);
-
-  /* One amber ramp, light to dark. Higher number = darker.
-     Contrast against the page background (#faf9f6):
-       400 1.91  |  500 2.98  |  600 4.71  |  700 6.64
-     So 400 and 500 are fill-only; text and icons need 600 or darker. */
-  --accent-400: #f5a524;
-  --accent-500: #d97706;
-  --accent-600: #b45309;
-  --accent-700: #92400e;
-
-  /* Ink for text and icons sitting on a 400/500 fill. */
-  --on-accent: #1a1206;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-border: var(--border);
-  --color-rule: var(--rule);
-  --color-accent-400: var(--accent-400);
-  --color-accent-500: var(--accent-500);
-  --color-accent-600: var(--accent-600);
-  --color-accent-700: var(--accent-700);
-  --color-on-accent: var(--on-accent);
   --font-sans: var(--font-sans-body);
-  --font-serif: var(--font-serif-display);
   --font-mono: var(--font-geist-mono);
 }
 
 html {
   scroll-behavior: smooth;
-  /* Anchors land below the fixed header instead of under it. */
-  scroll-padding-top: 6rem;
+  /* Anchors land clear of the top edge rather than flush against it. */
+  scroll-padding-top: 2rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans-body), system-ui, sans-serif;
   overflow-x: hidden;
 }
 
-/* Visible on every focusable element, on both paper and amber fills.
-   The offset keeps the ring on the background, where it reads at 16:1. */
+/* Visible on every focusable element in both themes. The offset keeps the ring
+   on the surrounding background, where it reads at full contrast. */
 :focus-visible {
-  outline: 2px solid var(--foreground);
+  outline: 2px solid #171717;
   outline-offset: 2px;
   border-radius: 3px;
 }
+.dark :focus-visible {
+  outline-color: #fafafa;
+}
 
 ::selection {
-  background: var(--accent-400);
-  color: var(--on-accent);
+  background: #171717;
+  color: #fafafa;
 }
-
-/* Display face for headings only. Body copy stays sans for readability. */
-.font-display {
-  font-family: var(--font-serif-display), Georgia, serif;
-  font-weight: 400;
-  letter-spacing: -0.015em;
-}
-
-/* Small caps label above a section heading. */
-.eyebrow {
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent-700);
-}
-
-/* Flat panel: hairline border on white, no blur, no lift-on-hover by default. */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-}
-
-/* Underline that draws in from the left on hover. Transform only. */
-.link-underline {
-  background-image: linear-gradient(var(--accent-600), var(--accent-600));
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 0% 1px;
-  transition: background-size 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.link-underline:hover,
-.link-underline:focus-visible {
-  background-size: 100% 1px;
+.dark ::selection {
+  background: #fafafa;
+  color: #171717;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-
-  .link-underline {
-    transition: none;
   }
 }

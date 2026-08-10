@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight } from "lucide-react";
@@ -26,10 +26,30 @@ export function ResumeCard({
 }: ResumeCardProps) {
   const [expanded, setExpanded] = useState(false);
   const expandable = Boolean(description);
+  const panelId = useId();
+
+  const toggle = () => expandable && setExpanded(!expanded);
 
   return (
     <div
-      onClick={() => expandable && setExpanded(!expanded)}
+      // The row carries the description behind a disclosure, so it needs to be
+      // operable by keyboard. A real <button> cannot legally wrap the heading,
+      // hence the explicit button role plus key handling.
+      {...(expandable
+        ? {
+            role: "button",
+            tabIndex: 0,
+            "aria-expanded": expanded,
+            "aria-controls": panelId,
+            onClick: toggle,
+            onKeyDown: (e: React.KeyboardEvent) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                toggle();
+              }
+            },
+          }
+        : {})}
       className={cn(
         "block rounded-lg p-3 transition-colors",
         expandable && "cursor-pointer hover:bg-black/[0.03] dark:hover:bg-white/5"
@@ -53,22 +73,24 @@ export function ResumeCard({
           )}
         </span>
 
-        <div className="flex-grow flex-col items-center">
-          <div className="flex items-center justify-between gap-2">
-            <h3 className="inline-flex items-center justify-center gap-2 text-sm font-semibold leading-none text-neutral-900 sm:text-base dark:text-neutral-50">
-              {title}
+        <div className="min-w-0 flex-grow flex-col items-center">
+          {/* Wraps rather than overflowing once the title and period no longer
+              fit side by side, which happens around 320px. */}
+          <div className="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-0.5">
+            <h3 className="flex min-w-0 items-center gap-2 text-sm font-semibold leading-tight text-neutral-900 sm:text-base dark:text-neutral-50">
+              <span className="min-w-0 break-words">{title}</span>
               {expandable && (
                 <ChevronRight
                   size={14}
+                  aria-hidden="true"
                   className={cn(
-                    "shrink-0 text-neutral-500 transition-all duration-300",
-                    expanded ? "rotate-90" : "rotate-0",
-                    "opacity-60 group-hover:opacity-100"
+                    "shrink-0 text-neutral-500 opacity-60 transition-transform duration-300",
+                    expanded ? "rotate-90" : "rotate-0"
                   )}
                 />
               )}
             </h3>
-            <div className="shrink-0 text-right text-xs tabular-nums text-neutral-500 sm:text-sm dark:text-neutral-400">
+            <div className="shrink-0 text-xs tabular-nums text-neutral-500 sm:text-sm dark:text-neutral-400">
               {period}
             </div>
           </div>
@@ -83,13 +105,14 @@ export function ResumeCard({
       <AnimatePresence initial={false}>
         {expanded && description && (
           <motion.div
+            id={panelId}
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden text-xs text-neutral-600 sm:text-sm dark:text-neutral-400"
           >
-            <p className="mt-2 pl-16">{description}</p>
+            <p className="mt-2 sm:pl-16">{description}</p>
           </motion.div>
         )}
       </AnimatePresence>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { createContext, useContext, useRef } from "react";
 import {
   motion,
   useMotionValue,
@@ -11,9 +11,19 @@ import {
 } from "framer-motion";
 import { cn } from "@/lib/cn";
 
-const BASE_SIZE = 40;
+/** 44px is the minimum comfortable touch target, so the resting size matches it
+ *  rather than the 40px the reference dock uses. */
+const BASE_SIZE = 44;
 const MAX_SIZE = 60;
 const DISTANCE = 130;
+
+/**
+ * The pointer position is shared through context rather than by wrapping each
+ * child. Wrapping broke across the server/client boundary: the page is a server
+ * component, so element identity is not preserved and separators were being
+ * sized as if they were icons.
+ */
+const MouseXContext = createContext<MotionValue<number> | null>(null);
 
 /**
  * macOS-style dock: each icon grows as the cursor approaches it. The scaling is
@@ -30,34 +40,30 @@ export function Dock({
   const mouseX = useMotionValue(Infinity);
 
   return (
-    <motion.div
-      onMouseMove={(e) => mouseX.set(e.pageX)}
-      onMouseLeave={() => mouseX.set(Infinity)}
-      className={cn(
-        "mx-auto flex h-[58px] w-max items-end gap-2 rounded-2xl border border-black/10 bg-white/80 px-3 pb-3 backdrop-blur-md",
-        "dark:border-white/10 dark:bg-neutral-900/80",
-        className
-      )}
-    >
-      {/* Each child receives the shared pointer position. */}
-      {Array.isArray(children)
-        ? children.map((child, i) => (
-            <DockItem key={i} mouseX={mouseX}>
-              {child}
-            </DockItem>
-          ))
-        : children}
-    </motion.div>
+    <MouseXContext.Provider value={mouseX}>
+      <motion.div
+        onMouseMove={(e) => mouseX.set(e.pageX)}
+        onMouseLeave={() => mouseX.set(Infinity)}
+        className={cn(
+          // Seven 44px targets only fit a 320px screen without gaps, so the
+          // spacing and padding open up from the small breakpoint onward.
+          "mx-auto flex h-[60px] w-max items-end gap-0 rounded-2xl border border-black/10 bg-white/80 px-1 pb-2 backdrop-blur-md sm:gap-2 sm:px-3 sm:pb-3",
+          "dark:border-white/10 dark:bg-neutral-900/80",
+          className
+        )}
+      >
+        {children}
+      </motion.div>
+    </MouseXContext.Provider>
   );
 }
 
-function DockItem({
-  mouseX,
-  children,
-}: {
-  mouseX: MotionValue<number>;
-  children: React.ReactNode;
-}) {
+/** Square that grows toward the pointer. Used by the icon and button wrappers. */
+function DockItem({ children }: { children: React.ReactNode }) {
+  const shared = useContext(MouseXContext);
+  const standalone = useMotionValue(Infinity);
+  const mouseX = shared ?? standalone;
+
   const ref = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
 
@@ -76,13 +82,18 @@ function DockItem({
   return (
     <motion.div
       ref={ref}
-      style={reduceMotion ? { width: BASE_SIZE, height: BASE_SIZE } : { width: size, height: size }}
-      className="flex aspect-square items-center justify-center rounded-full"
+      style={
+        reduceMotion ? { width: BASE_SIZE, height: BASE_SIZE } : { width: size, height: size }
+      }
+      className="flex aspect-square shrink-0 items-center justify-center rounded-full"
     >
       {children}
     </motion.div>
   );
 }
+
+const itemClasses =
+  "flex h-full w-full items-center justify-center rounded-full text-neutral-700 transition-colors hover:bg-black/5 hover:text-black dark:text-neutral-300 dark:hover:bg-white/10 dark:hover:text-white";
 
 export function DockIcon({
   href,
@@ -96,15 +107,17 @@ export function DockIcon({
   children: React.ReactNode;
 }) {
   return (
-    <a
-      href={href}
-      aria-label={label}
-      title={label}
-      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      className="flex h-full w-full items-center justify-center rounded-full text-neutral-700 transition-colors hover:bg-black/5 hover:text-black dark:text-neutral-300 dark:hover:bg-white/10 dark:hover:text-white"
-    >
-      {children}
-    </a>
+    <DockItem>
+      <a
+        href={href}
+        aria-label={label}
+        title={label}
+        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        className={itemClasses}
+      >
+        {children}
+      </a>
+    </DockItem>
   );
 }
 
@@ -118,17 +131,20 @@ export function DockButton({
   children: React.ReactNode;
 }) {
   return (
-    <button
-      onClick={onClick}
-      aria-label={label}
-      title={label}
-      className="flex h-full w-full items-center justify-center rounded-full text-neutral-700 transition-colors hover:bg-black/5 hover:text-black dark:text-neutral-300 dark:hover:bg-white/10 dark:hover:text-white"
-    >
-      {children}
-    </button>
+    <DockItem>
+      <button onClick={onClick} aria-label={label} title={label} className={itemClasses}>
+        {children}
+      </button>
+    </DockItem>
   );
 }
 
 export function DockSeparator() {
-  return <div className="h-8 w-px self-center bg-black/10 dark:bg-white/15" aria-hidden="true" />;
+  // Purely decorative, so it is the first thing to go when width is scarce.
+  return (
+    <div
+      className="mx-1 hidden h-8 w-px self-center bg-black/10 sm:block dark:bg-white/15"
+      aria-hidden="true"
+    />
+  );
 }

@@ -64,8 +64,6 @@ export function BlurFadeText({
   yOffset = 8,
   animateByCharacter = false,
 }: BlurFadeTextProps) {
-  const characters = Array.from(text);
-
   const variants: Variants = {
     hidden: { y: yOffset, opacity: 0, filter: "blur(8px)" },
     visible: { y: 0, opacity: 1, filter: "blur(0px)" },
@@ -86,20 +84,34 @@ export function BlurFadeText({
     );
   }
 
+  // Characters are grouped per word. Animating loose inline-blocks lets a line
+  // break between any two letters, which split the name mid-word on narrow
+  // screens; keeping each word in a nowrap box confines breaks to spaces.
+  let charIndex = 0;
+  const words = text.split(" ");
+
   return (
     <span className={className}>
-      {characters.map((char, i) => (
-        <motion.span
-          data-reveal=""
-          key={i}
-          initial="hidden"
-          animate="visible"
-          variants={variants}
-          transition={{ delay: delay + i * 0.03, duration: 0.4, ease: "easeOut" }}
-          className="inline-block"
-        >
-          {char === " " ? " " : char}
-        </motion.span>
+      {words.map((word, wordIndex) => (
+        <span key={wordIndex} className="inline-block whitespace-nowrap">
+          {Array.from(word).map((char) => {
+            const i = charIndex++;
+            return (
+              <motion.span
+                data-reveal=""
+                key={i}
+                initial="hidden"
+                animate="visible"
+                variants={variants}
+                transition={{ delay: delay + i * 0.03, duration: 0.4, ease: "easeOut" }}
+                className="inline-block"
+              >
+                {char}
+              </motion.span>
+            );
+          })}
+          {wordIndex < words.length - 1 && " "}
+        </span>
       ))}
     </span>
   );
