@@ -71,6 +71,9 @@ export default function RootLayout({
     <html
       lang="nl"
       data-scroll-behavior="smooth"
+      /* The /voorbeeld theme script sets the `dark` class before hydration, so
+         the class list legitimately differs from the server render. */
+      suppressHydrationWarning
       className={`${serifDisplay.variable} ${sansBody.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">

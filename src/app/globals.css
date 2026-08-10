@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Class-based dark mode, used by the /voorbeeld preview's theme toggle. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   /* Warm paper, not the blue-grey every dashboard template ships with. */
   --background: #faf9f6;
