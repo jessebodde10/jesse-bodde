@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 type ResumeCardProps = {
-  /** Initials stand in for a company logo, which we do not have. */
+  /** Employer logo. Falls back to initials when we have none. */
+  logo?: string;
   initials: string;
   title: string;
   subtitle?: string;
@@ -15,6 +17,7 @@ type ResumeCardProps = {
 };
 
 export function ResumeCard({
+  logo,
   initials,
   title,
   subtitle,
@@ -33,8 +36,21 @@ export function ResumeCard({
       )}
     >
       <div className="flex items-center gap-4">
-        <span className="flex size-12 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white text-xs font-semibold text-neutral-600 dark:border-white/15 dark:bg-neutral-800 dark:text-neutral-300">
-          {initials}
+        {/* Logos vary between square marks and wide lock-ups, so the image is
+            contained inside the circle rather than cropped to fill it. */}
+        <span className="flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-full border border-black/10 bg-white text-xs font-semibold text-neutral-600 dark:border-white/15 dark:bg-white dark:text-neutral-300">
+          {logo ? (
+            <Image
+              src={logo}
+              alt=""
+              width={48}
+              height={48}
+              unoptimized
+              className="size-9 object-contain"
+            />
+          ) : (
+            <span className="dark:text-neutral-700">{initials}</span>
+          )}
         </span>
 
         <div className="flex-grow flex-col items-center">

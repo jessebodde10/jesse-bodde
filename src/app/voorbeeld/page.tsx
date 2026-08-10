@@ -11,7 +11,18 @@ import { Badge } from "@/components/preview/Badge";
 import { LinkedinIcon } from "@/components/icons";
 import { profile, about, work, education, projects, skillGroups } from "@/lib/data";
 
-/** Stand-ins for the company logos the reference template uses. */
+/** Logos taken from each employer's own site. Leadz Social Media Marketing has
+ *  no site left, so that row keeps its initials. */
+const logoFor: Record<string, string> = {
+  Cargomate: "/images/logos/cargomate.svg",
+  "CAK Den Haag, medicijnverklaringen": "/images/logos/cak.png",
+  Centuristics: "/images/logos/centuristics.png",
+  "Bit Academy, cursus van twaalf weken": "/images/logos/bit-academy.png",
+  "ROC Mondriaan Delft": "/images/logos/roc-mondriaan.svg",
+  "Stanislascollege Reinier de Graafpad": "/images/logos/stanislascollege.png",
+};
+
+/** Fallback when no logo exists. */
 const initialsFor: Record<string, string> = {
   Cargomate: "CM",
   "CAK Den Haag, medicijnverklaringen": "CAK",
@@ -94,6 +105,7 @@ export default function VoorbeeldPage() {
             {work.map((item, i) => (
               <BlurFade key={item.title + item.period} delay={BLUR_DELAY * 6 + i * 0.05}>
                 <ResumeCard
+                  logo={logoFor[item.org]}
                   initials={initialsFor[item.org] ?? item.org.slice(0, 2).toUpperCase()}
                   title={item.org}
                   subtitle={item.title}
@@ -114,6 +126,7 @@ export default function VoorbeeldPage() {
             {education.map((item, i) => (
               <BlurFade key={item.title + item.period} delay={BLUR_DELAY * 8 + i * 0.05}>
                 <ResumeCard
+                  logo={logoFor[item.org]}
                   initials={initialsFor[item.org] ?? item.org.slice(0, 2).toUpperCase()}
                   title={item.org}
                   subtitle={item.title}
