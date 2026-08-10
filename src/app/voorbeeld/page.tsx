@@ -38,7 +38,7 @@ const BLUR_DELAY = 0.04;
 const allSkills = skillGroups.flatMap((g) => g.items);
 
 const projectImages: Record<string, string> = {
-  bodai: "/images/projects/bodai.png",
+  "leadz-systems": "/images/projects/leadz-systems.png",
 };
 
 export default function VoorbeeldPage() {

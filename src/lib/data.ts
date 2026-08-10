@@ -28,16 +28,15 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "bodai",
-    title: "Bodai",
-    subtitle: "voorheen Leadz Systems",
+    slug: "leadz-systems",
+    title: "Leadz Systems",
     period: "Mei 2026 tot heden",
     context:
-      "Mijn eigen praktijk, opgebouwd naast mijn werk. Ik bouw automatiseringen voor kleine ondernemers die geen eigen technisch team hebben.",
+      "Mijn eigen praktijk, opgebouwd naast mijn werk. Ik bouw automatiseringen voor kleine ondernemers die geen eigen technisch team hebben en die zelf geen tijd hebben om uit te zoeken wat er mogelijk is.",
     problem:
-      "Bij kleine ondernemers blijft veel terugkerend werk handmatig: offertes opstellen, e-mails beantwoorden, administratie bijhouden en klanten opvolgen. Dat werk gaat ten koste van de tijd die naar klanten of het product kan.",
+      "Bij kleine ondernemers blijft veel terugkerend werk handmatig: offertes opstellen, e-mails beantwoorden, administratie bijhouden en klanten opvolgen. Dat werk gaat ten koste van de tijd die naar klanten of het product kan, en het wordt zelden ingepland. Het gebeurt er gewoon bij, meestal 's avonds.",
     approach:
-      "Per opdracht breng ik eerst het proces in kaart en bepaal ik welke stappen zich lenen voor automatisering. De workflows bouw ik in n8n, met taalmodellen voor de stappen die interpretatie vragen en API-koppelingen tussen de systemen die de ondernemer al gebruikt.",
+      "Per opdracht breng ik eerst het proces in kaart en bepaal ik welke stappen zich lenen voor automatisering. De workflows bouw ik in n8n, met taalmodellen voor de stappen die interpretatie vragen en API-koppelingen tussen de systemen die de ondernemer al gebruikt. Ik houd het bewust klein: liever één stap die betrouwbaar draait dan een keten die niemand meer kan volgen als er iets misgaat.",
     tech: ["n8n", "Claude Code", "ChatGPT", "Gemini", "API-integraties"],
     status: "Doorlopend. De website staat live op leadzsystems.nl.",
     liveUrl: "https://leadzsystems.nl",
@@ -50,11 +49,12 @@ export const projects: Project[] = [
     context:
       "Eigen onderzoeksproject, voortgekomen uit mijn werk als declarant, waar het controleren van documenten dagelijkse praktijk is.",
     problem:
-      "Documenten zoals offertes, verklaringen en formulieren moeten worden gelezen, geïnterpreteerd en omgezet in een vervolgstap. Dat gebeurt vrijwel volledig met de hand.",
+      "Documenten zoals offertes, verklaringen en formulieren moeten worden gelezen, geïnterpreteerd en omgezet in een vervolgstap. Dat gebeurt vrijwel volledig met de hand, en juist bij dat overtypen sluipen de fouten erin.",
     approach:
       "Ik bouw agent-flows die een document uitlezen, de gegevens structureren en doorzetten naar de juiste vervolgstap. Op de punten waar een fout duur is, blijft een mens de controle houden.",
     tech: ["Claude Code", "n8n", "API-integraties"],
-    status: "Experimenteel. Ik gebruik dit om te leren waar agents betrouwbaar zijn en waar niet.",
+    status:
+      "Experimenteel. Ik gebruik het vooral om te leren waar een agent betrouwbaar is en waar hij het laat afweten, want dat verschil bepaalt of je zoiets bij een klant durft neer te zetten.",
   },
   {
     slug: "e-mailworkflows",
@@ -63,11 +63,12 @@ export const projects: Project[] = [
     context:
       "Ontstaan vanuit mijn tijd als Customer Success Specialist, waar ik dagelijks klantvragen beantwoordde via mail, telefoon en chat.",
     problem:
-      "Klantvragen vragen om snelle en consistente opvolging. Zonder team is dat lastig vol te houden zodra het volume oploopt.",
+      "Klantvragen vragen om snelle en consistente opvolging. Zonder team is dat lastig vol te houden zodra het volume oploopt, en de vragen die het meest terugkomen zijn vaak juist de simpelste.",
     approach:
       "Flows die binnenkomende vragen classificeren, een concept-antwoord voorbereiden en doorschakelen naar een mens zodra een vraag beoordeling nodig heeft.",
     tech: ["n8n", "ChatGPT", "Gemini", "API-integraties"],
-    status: "Experimenteel, gebouwd om de aanpak te testen.",
+    status:
+      "Experimenteel. Gebouwd om uit te zoeken hoe ver je komt met automatisch sorteren voordat iemand er echt zelf naar moet kijken.",
   },
 ];
 
@@ -86,28 +87,28 @@ export const work: ExperienceItem[] = [
     title: "Junior Declarant / Expediteur",
     org: "Cargomate",
     description:
-      "Douanedocumenten opstellen en controleren, en klanten adviseren bij logistieke vraagstukken. Werk waarin precisie onder tijdsdruk de norm is.",
+      "Douanedocumenten opstellen en controleren voor import en export, en klanten adviseren bij logistieke vraagstukken. Een aangifte moet kloppen voordat een zending verder kan, dus een fout kost meteen tijd en geld. Nauwkeurig werken onder tijdsdruk was hier de dagelijkse praktijk.",
   },
   {
     period: "Apr – dec 2024",
     title: "Customer Success Specialist",
     org: "Cargomate",
     description:
-      "Relatiebeheer en het verbeteren van de klantreis door knelpunten vroeg te signaleren. Contact liep via chat, telefoon en WhatsApp.",
+      "Vast aanspreekpunt voor klanten via chat, telefoon en WhatsApp. Naast het beantwoorden van vragen zocht ik uit waar klanten steeds opnieuw op vastliepen, zodat die knelpunten aan de bron opgelost konden worden in plaats van per geval.",
   },
   {
     period: "Mei 2023 – mrt 2024",
     title: "Administratief medewerker",
     org: "CAK Den Haag, medicijnverklaringen",
     description:
-      "Vakinhoudelijke ondersteuning en het beantwoorden van complexe klantvragen per telefoon en e-mail.",
+      "Vragen over medicijnverklaringen beantwoorden per telefoon en e-mail. Vaak ging het om mensen die vastliepen in de regels, dus het werk bestond vooral uit uitzoeken hoe een regeling in hun situatie uitpakte en dat begrijpelijk uitleggen.",
   },
   {
     period: "2017 – 2022",
     title: "Zelfstandig ondernemer",
     org: "Leadz Social Media Marketing",
     description:
-      "Vijf jaar lang advertentiecampagnes opgezet via Facebook en Google, resultaten geanalyseerd en bijgestuurd op basis van data.",
+      "Vijf jaar lang advertentiecampagnes opgezet en beheerd via Facebook en Google. Alles zelf gedaan: klanten binnenhalen, campagnes inrichten, resultaten bijhouden en bijsturen zodra de cijfers daar aanleiding toe gaven. Mijn eerste ervaring met een eigen bedrijf runnen, inclusief alles eromheen.",
   },
 ];
 
@@ -116,33 +117,35 @@ export const education: ExperienceItem[] = [
     period: "2024",
     title: "Douanevaardigheden in de praktijk",
     org: "Centuristics",
-    description: "Vakinhoudelijke verdieping voor mijn rol in de logistieke sector.",
+    description:
+      "Praktijkgerichte cursus over douaneaangiftes, regelgeving en de documenten die daarbij horen. Gevolgd naast mijn werk als declarant, om de theorie achter het dagelijkse werk beter te begrijpen.",
   },
   {
     period: "2021",
     title: "Full Stack Web Developer",
     org: "Bit Academy, cursus van twaalf weken",
     description:
-      "Mijn eerste serieuze kennismaking met programmeren en het punt waarop mijn interesse in techniek een concrete richting kreeg.",
+      "Twaalf weken lang leren programmeren met HTML, CSS en JavaScript. Wat ik hier vooral leerde was een probleem opdelen in stappen die een computer kan uitvoeren. Dat bleek later precies de manier van denken die je nodig hebt om workflows te bouwen.",
   },
   {
     period: "2016 – 2020",
     title: "Ondernemer Retail, niveau 4",
     org: "ROC Mondriaan Delft",
-    description: "Opleiding gericht op ondernemerschap en zelfstandig werken.",
+    description:
+      "Mbo-opleiding gericht op ondernemerschap en bedrijfsvoering in de retail. Tijdens deze opleiding ben ik voor mezelf begonnen.",
   },
   {
     period: "2012 – 2016",
     title: "VMBO TL",
     org: "Stanislascollege Reinier de Graafpad",
-    description: "",
+    description: "Middelbare school, afgerond met de theoretische leerweg.",
   },
 ];
 
 export const ownProjects: ExperienceItem[] = [
   {
     period: "Mei 2026 – heden",
-    title: "Bodai, voorheen Leadz Systems",
+    title: "Leadz Systems",
     org: "Eigen praktijk",
     description:
       "AI-workflows en automatiseringen voor kleine ondernemers, gebouwd met n8n, Claude Code, ChatGPT, Gemini en API-koppelingen.",
@@ -201,10 +204,11 @@ export const about = {
   lead:
     "Mijn loopbaan loopt via ondernemerschap, klantcontact, administratie en logistiek naar automatisering. In iedere rol merkte ik dat ik vooral geïnteresseerd was in dezelfde vraag: waar loopt een proces vast en hoe kan het slimmer?",
   body: [
-    "Vanuit die nieuwsgierigheid ben ik mij gaan verdiepen in programmeren, AI-workflows en API-koppelingen. Ik combineer daardoor technische nieuwsgierigheid met ervaring aan de operationele en menselijke kant van een organisatie.",
-    "Vijf jaar als zelfstandig ondernemer leerde me wat er nodig is om zelf iets op te bouwen. In customer success, logistiek en douane kwam daar de operationele kant bij: werken met vaste procedures, korte lijnen naar de klant en documenten die tot op de letter moeten kloppen. De Full Stack Web Developer-cursus bij Bit Academy gaf me de basis om zelf te bouwen, de rest heb ik mezelf aangeleerd door AI-workflows te maken voor echte ondernemers.",
+    "Vanuit die nieuwsgierigheid ben ik mij gaan verdiepen in programmeren, AI-workflows en API-koppelingen. Ik combineer daardoor technische nieuwsgierigheid met ervaring aan de operationele en menselijke kant van een organisatie. Dat betekent dat ik een proces meestal eerst van de andere kant heb gezien, vanaf de telefoon of de balie, voordat ik er iets aan ga bouwen.",
+    "Vijf jaar als zelfstandig ondernemer leerde me wat er nodig is om zelf iets op te bouwen. In customer success, logistiek en douane kwam daar de operationele kant bij: werken met vaste procedures, korte lijnen naar de klant en documenten die tot op de letter moeten kloppen. De Full Stack Web Developer-cursus bij Bit Academy gaf me de basis om zelf te bouwen, de rest heb ik mezelf aangeleerd door AI-workflows te maken voor echte ondernemers met echte deadlines.",
   ],
-  kika: "Buiten werk ben ik fanatiek hardloper. Ik loop marathons voor Stichting KiKa en haal daarmee geld op voor onderzoek naar kinderkanker.",
+  // Begint bewust niet met "Buiten werk", dat staat al in de kop erboven.
+  kika: "Ik ben fanatiek hardloper. Ik loop marathons voor Stichting KiKa en haal daarmee geld op voor onderzoek naar kinderkanker. De laatste was de marathon van Berlijn.",
   kikaImageAlt: "Jesse Bodde na afloop van de marathon van Berlijn, met finishersmedaille",
 };
 
@@ -217,19 +221,19 @@ export const motivation = {
   sections: [
     {
       heading: "Waar mijn interesse begon",
-      body: "Ik ben niet via een technische opleiding in automatisering terechtgekomen. Ik begon als ondernemer, werkte daarna in klantcontact, administratie en logistiek, en liep in elke rol tegen hetzelfde aan: werk dat elke dag terugkomt en dat eigenlijk niet handmatig zou hoeven. Dat is wat mij naar programmeren en automatisering heeft gebracht.",
+      body: "Ik ben niet via een technische opleiding in automatisering terechtgekomen. Ik begon als ondernemer, werkte daarna in klantcontact, administratie en logistiek, en liep in elke rol tegen hetzelfde aan: werk dat elke dag terugkomt en dat eigenlijk niet handmatig zou hoeven. Op een gegeven moment werd de vraag hoe dat dan wél kon interessanter dan het werk zelf. Dat is wat mij naar programmeren en automatisering heeft gebracht.",
     },
     {
       heading: "Hoe ik werk",
-      body: "Ik begin bij het proces, niet bij de tool. Eerst uitzoeken waar het vastloopt en wat het de mensen die ermee werken daadwerkelijk kost. Pas daarna kijk ik welke stappen zich lenen voor automatisering en wat er beter met de hand kan blijven. Dat scheelt oplossingen die technisch kloppen maar in de praktijk niemand helpen.",
+      body: "Ik begin bij het proces, niet bij de tool. Eerst uitzoeken waar het vastloopt en wat het de mensen die ermee werken elke dag kost. Pas daarna kijk ik welke stappen zich lenen voor automatisering en wat er beter met de hand kan blijven. Dat voorkomt oplossingen die technisch kloppen maar in de praktijk niemand helpen, en dat zijn er meer dan je zou denken.",
     },
     {
       heading: "Wat ik meebreng",
-      body: "Praktijkervaring met het bouwen van AI-workflows in n8n, gekoppeld aan taalmodellen en bestaande systemen. Daarnaast jaren ervaring aan de kant van de klant en de operatie: uitleggen wat er gebeurt, meedenken met wie er belt, en werken met documenten waarin een fout geld of tijd kost. Die combinatie is zeldzamer dan alleen de techniek.",
+      body: "Praktijkervaring met het bouwen van AI-workflows in n8n, gekoppeld aan taalmodellen en bestaande systemen. Daarnaast jaren ervaring aan de kant van de klant en de operatie: uitleggen wat er gebeurt, meedenken met wie er belt, en werken met documenten waarin een fout geld of tijd kost. Ik ken daardoor beide kanten. Hoe je iets bouwt, en wat er misgaat zodra het terechtkomt bij mensen die er niet dagelijks mee bezig zijn.",
     },
     {
       heading: "Wat ik zoek",
-      body: "Een rol waarin ik proceskennis, klantcontact en AI-automatisering verder kan combineren en verdiepen. Ik werk graag op de plek waar techniek en de dagelijkse praktijk elkaar raken, en ik leer het snelst in een omgeving waar ik dingen mag bouwen die echt gebruikt worden.",
+      body: "Werk waarin ik dicht bij de praktijk blijf. Een plek waar techniek en het dagelijkse werk elkaar raken, waar ik processen mag doorgronden en waar wat ik bouw ook echt gebruikt wordt. Dat laatste is voor mij de snelste manier om beter te worden: van iets dat in productie draait krijg je eerlijker feedback dan van een oefenproject.",
     },
   ],
 };

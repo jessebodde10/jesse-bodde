@@ -76,6 +76,14 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${serifDisplay.variable} ${sansBody.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* Scroll reveals render as inline opacity:0 in the server HTML. If the
+            script never runs, that would leave the page blank, so force every
+            revealed element back to its resting state. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important;filter:none!important}`}</style>
+        </noscript>
+      </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}
       </body>

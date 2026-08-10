@@ -13,7 +13,7 @@ export default function Skills() {
         <SectionHeading
           eyebrow="Vaardigheden"
           title="Waar ik mee werk"
-          intro="Een overzicht van de tools en vakgebieden waarin ik ervaring heb opgebouwd, verdeeld over techniek en de operationele kant."
+          intro="De tools waar ik mee bouw en de vakgebieden waar ik vandaan kom. Dat laatste bepaalt vaak wat er überhaupt de moeite waard is om te automatiseren."
         />
 
         <div className="mt-14 grid gap-x-12 gap-y-12 border-t border-rule pt-12 md:grid-cols-3">

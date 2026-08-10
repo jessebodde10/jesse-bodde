@@ -36,6 +36,7 @@ export function BlurFade({
   return (
     <motion.div
       ref={ref}
+      data-reveal=""
       initial="hidden"
       animate={show ? "visible" : "hidden"}
       variants={variants}
@@ -73,6 +74,7 @@ export function BlurFadeText({
   if (!animateByCharacter) {
     return (
       <motion.span
+        data-reveal=""
         initial="hidden"
         animate="visible"
         variants={variants}
@@ -88,6 +90,7 @@ export function BlurFadeText({
     <span className={className}>
       {characters.map((char, i) => (
         <motion.span
+          data-reveal=""
           key={i}
           initial="hidden"
           animate="visible"

@@ -25,6 +25,10 @@ export default function Reveal({
 
   return (
     <Component
+      // The hidden state is rendered server-side as inline opacity:0, so
+      // without JS the text would never appear. data-reveal lets a <noscript>
+      // rule in the layout force it back to visible.
+      data-reveal=""
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
