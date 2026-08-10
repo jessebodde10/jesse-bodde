@@ -51,13 +51,16 @@ const projectImages: Record<string, string> = {
 
 export default function HomePage() {
   return (
-    <main className="relative mx-auto min-h-screen max-w-2xl px-6 py-12 sm:py-24">
+    // The wrapper is full width so the dot grid can run edge to edge; the
+    // reading column inside it stays capped at max-w-2xl.
+    <div className="relative">
       {/* Dot grid behind the top of the page, faded out downward. */}
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[420px] overflow-hidden [mask-image:linear-gradient(to_bottom,white,transparent)]">
         <DotPattern />
       </div>
 
-      <div className="flex flex-col gap-12">
+      <main className="mx-auto min-h-screen max-w-2xl px-6 py-12 sm:py-24">
+        <div className="flex flex-col gap-12">
         {/* ------------------------------------------------------------ hero */}
         <section id="hero">
           <div className="mx-auto w-full max-w-2xl space-y-8">
@@ -234,7 +237,8 @@ export default function HomePage() {
             </BlurFade>
           </div>
         </section>
-      </div>
+        </div>
+      </main>
 
       {/* ------------------------------------------------------------- dock */}
       <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto mb-4 flex origin-bottom h-full max-h-14">
@@ -264,6 +268,6 @@ export default function HomePage() {
 
       {/* Keeps the last section clear of the fixed dock. */}
       <div className="h-16" />
-    </main>
+    </div>
   );
 }

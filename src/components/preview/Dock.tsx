@@ -45,9 +45,9 @@ export function Dock({
         onMouseMove={(e) => mouseX.set(e.pageX)}
         onMouseLeave={() => mouseX.set(Infinity)}
         className={cn(
-          // Seven 44px targets only fit a 320px screen without gaps, so the
-          // spacing and padding open up from the small breakpoint onward.
-          "mx-auto flex h-[60px] w-max items-end gap-0 rounded-2xl border border-black/10 bg-white/80 px-1 pb-2 backdrop-blur-md sm:gap-2 sm:px-3 sm:pb-3",
+          // Six 44px targets plus tighter spacing come to 294 on a 320px
+          // screen. The gap and padding open up from the small breakpoint on.
+          "mx-auto flex h-[60px] w-max items-end gap-1 rounded-2xl border border-black/10 bg-white/80 px-1 pb-2 backdrop-blur-md sm:gap-2 sm:px-3 sm:pb-3",
           "dark:border-white/10 dark:bg-neutral-900/80",
           className
         )}
@@ -92,8 +92,9 @@ function DockItem({ children }: { children: React.ReactNode }) {
   );
 }
 
+/** Each icon sits in its own outlined circle, as in the reference dock. */
 const itemClasses =
-  "flex h-full w-full items-center justify-center rounded-full text-neutral-700 transition-colors hover:bg-black/5 hover:text-black dark:text-neutral-300 dark:hover:bg-white/10 dark:hover:text-white";
+  "flex h-full w-full items-center justify-center rounded-full border border-black/10 bg-white text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-black dark:border-white/15 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-white";
 
 export function DockIcon({
   href,
