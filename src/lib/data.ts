@@ -194,11 +194,10 @@ export const about = {
   lead:
     "Mijn loopbaan loopt via ondernemerschap, klantcontact, administratie en logistiek naar automatisering. In iedere rol merkte ik dat ik vooral geïnteresseerd was in dezelfde vraag: waar loopt een proces vast en hoe kan het slimmer?",
   body: [
-    "Vanuit die nieuwsgierigheid ben ik mij gaan verdiepen in programmeren, AI-workflows en API-koppelingen. Ik combineer daardoor technische nieuwsgierigheid met ervaring aan de operationele en menselijke kant van een organisatie. Dat betekent dat ik een proces meestal eerst van de andere kant heb gezien, vanaf de telefoon of de balie, voordat ik er iets aan ga bouwen.",
-    "Vijf jaar als zelfstandig ondernemer leerde me wat er nodig is om zelf iets op te bouwen. In customer success, logistiek en douane kwam daar de operationele kant bij: werken met vaste procedures, korte lijnen naar de klant en documenten die tot op de letter moeten kloppen. De Full Stack Web Developer-cursus bij Bit Academy gaf me de basis om zelf te bouwen, de rest heb ik mezelf aangeleerd door AI-workflows te maken voor echte ondernemers met echte deadlines.",
+    "Vanuit die vraag ben ik me gaan verdiepen in programmeren, AI-workflows en API-koppelingen. De meeste processen heb ik eerst van de andere kant gezien, vanaf de telefoon of de balie, voordat ik er iets aan ging bouwen.",
+    "Vijf jaar als zelfstandig ondernemer, daarna customer success, logistiek en douane: vaste procedures, korte lijnen naar de klant en documenten die tot op de letter moeten kloppen. De cursus bij Bit Academy gaf me de technische basis, de rest heb ik mezelf aangeleerd door workflows te bouwen voor echte ondernemers.",
   ],
-  // Begint bewust niet met "Buiten werk", dat staat al in de kop erboven.
-  kika: "Ik ben fanatiek hardloper. Ik loop marathons voor Stichting KiKa en haal daarmee geld op voor onderzoek naar kinderkanker. De laatste was de marathon van Berlijn.",
+  kika: "Buiten werk loop ik marathons voor Stichting KiKa, om geld op te halen voor onderzoek naar kinderkanker. De laatste was Berlijn.",
   kikaImageAlt: "Jesse Bodde na afloop van de marathon van Berlijn, met finishersmedaille",
 };
 
