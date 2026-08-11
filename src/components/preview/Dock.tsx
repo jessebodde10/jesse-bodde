@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useRef } from "react";
+import { createContext, useContext, useEffect, useRef } from "react";
 import {
   motion,
   useMotionValue,
@@ -39,11 +39,29 @@ export function Dock({
 }) {
   const mouseX = useMotionValue(Infinity);
 
+  // A click that navigates, opens a new tab or launches a mail client never
+  // fires a leave event, so without this the icon under the pointer would stay
+  // enlarged after coming back to the page.
+  useEffect(() => {
+    const reset = () => mouseX.set(Infinity);
+    window.addEventListener("blur", reset);
+    document.addEventListener("visibilitychange", reset);
+    return () => {
+      window.removeEventListener("blur", reset);
+      document.removeEventListener("visibilitychange", reset);
+    };
+  }, [mouseX]);
+
   return (
     <MouseXContext.Provider value={mouseX}>
       <motion.div
-        onMouseMove={(e) => mouseX.set(e.pageX)}
-        onMouseLeave={() => mouseX.set(Infinity)}
+        // Only a real mouse magnifies. A tap would otherwise set the position
+        // and leave it there, since touch sends no leave event afterwards.
+        onPointerMove={(e) => {
+          if (e.pointerType === "mouse") mouseX.set(e.pageX);
+        }}
+        onPointerLeave={() => mouseX.set(Infinity)}
+        onPointerCancel={() => mouseX.set(Infinity)}
         className={cn(
           // Six 44px targets plus tighter spacing come to 294 on a 320px
           // screen. The gap and padding open up from the small breakpoint on.
