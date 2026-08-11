@@ -68,7 +68,9 @@ export default function HomePage() {
         {/* ------------------------------------------------------------ hero */}
         <section id="hero">
           <div className="mx-auto w-full max-w-2xl space-y-8">
-            <div className="flex justify-between gap-2">
+            {/* Top aligned so the portrait lines up with the name rather than
+                floating halfway down a much taller block of text on mobile. */}
+            <div className="flex items-start justify-between gap-3 sm:gap-6">
               <div className="flex flex-1 flex-col space-y-1.5">
                 <BlurFadeText
                   delay={BLUR_DELAY}
@@ -83,14 +85,16 @@ export default function HomePage() {
                   text="AI-automatisering, procesverbetering en klantgerichte technologie. Ik kom uit ondernemerschap, klantcontact en logistiek en bouw nu workflows die werk uit handen nemen."
                 />
               </div>
-              <BlurFade delay={BLUR_DELAY}>
-                <span className="relative block size-28 shrink-0 overflow-hidden rounded-full border border-black/10 dark:border-white/15">
+              {/* Stays at 112px on mobile, where the heading beside it already
+                  has little room, and grows once there is width to spare. */}
+              <BlurFade delay={BLUR_DELAY} className="shrink-0">
+                <span className="relative block size-28 overflow-hidden rounded-full border border-black/10 sm:size-36 lg:size-40 dark:border-white/15">
                   <Image
                     src="/images/jesse-bodde.png"
                     alt="Jesse Bodde"
                     fill
                     priority
-                    sizes="112px"
+                    sizes="(max-width: 640px) 112px, (max-width: 1024px) 144px, 160px"
                     className="object-cover object-top"
                   />
                 </span>
