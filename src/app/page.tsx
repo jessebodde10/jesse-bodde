@@ -47,6 +47,10 @@ const allSkills = skillGroups.flatMap((g) => g.items);
 
 const projectImages: Record<string, string> = {
   "leadz-systems": "/images/projects/leadz-systems.png",
+  "happy-face": "/images/projects/happy-face.webp",
+  "connect-rise": "/images/projects/connect-rise.webp",
+  groeituin: "/images/projects/groeituin.webp",
+  freezo: "/images/projects/freezo.webp",
 };
 
 export default function HomePage() {
@@ -187,8 +191,9 @@ export default function HomePage() {
                     Waar ik aan werk
                   </h2>
                   <p className="text-neutral-600 md:text-lg/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-neutral-400">
-                    Automatiseringen die ik zelf heb opgezet, van een eigen praktijk tot
-                    experimenten waarmee ik uitzoek hoe ver ik met agents kom.
+                    Werk uit mijn eigen praktijk: websites en een dashboard die ik voor
+                    klanten bouwde, plus automatiseringen en experimenten waarmee ik uitzoek
+                    hoe ver ik met agents kom.
                   </p>
                 </div>
               </div>
@@ -200,10 +205,12 @@ export default function HomePage() {
                   <ProjectCard
                     title={project.title}
                     period={project.period}
-                    description={project.approach}
+                    label={project.label}
+                    description={project.summary ?? project.approach ?? ""}
                     tech={project.tech}
                     image={projectImages[project.slug]}
                     liveUrl={project.liveUrl}
+                    caseUrl={project.caseUrl}
                   />
                 </BlurFade>
               ))}

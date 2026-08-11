@@ -15,13 +15,19 @@ export type Project = {
   slug: string;
   title: string;
   subtitle?: string;
-  period: string;
-  context: string;
-  problem: string;
-  approach: string;
+  /** "Website", "Web-app". Shown on client work, which has no run of dates. */
+  label?: string;
+  period?: string;
+  /** Card text. Client cases have only this; own projects fall back to approach. */
+  summary?: string;
+  context?: string;
+  problem?: string;
+  approach?: string;
   tech: string[];
-  status: string;
+  status?: string;
   liveUrl?: string;
+  /** Case study on leadzsystems.nl. */
+  caseUrl?: string;
   githubUrl?: string;
   featured?: boolean;
 };
@@ -32,7 +38,7 @@ export const projects: Project[] = [
     title: "Leadz Systems",
     period: "Mei 2026 tot heden",
     context:
-      "Mijn eigen praktijk, opgebouwd naast mijn werk. Ik bouw automatiseringen voor kleine ondernemers die geen eigen technisch team hebben en die zelf geen tijd hebben om uit te zoeken wat er mogelijk is.",
+      "Mijn eigen praktijk, opgebouwd naast mijn werk. Ik bouw websites en automatiseringen voor kleine ondernemers die geen eigen technisch team hebben en die zelf geen tijd hebben om uit te zoeken wat er mogelijk is.",
     problem:
       "Bij kleine ondernemers blijft veel terugkerend werk handmatig: offertes opstellen, e-mails beantwoorden, administratie bijhouden en klanten opvolgen. Dat werk gaat ten koste van de tijd die naar klanten of het product kan, en het wordt zelden ingepland. Het gebeurt er gewoon bij, meestal 's avonds.",
     approach:
@@ -42,6 +48,46 @@ export const projects: Project[] = [
     liveUrl: "https://leadzsystems.nl",
     featured: true,
   },
+
+  /* Klantwerk via Leadz Systems. Teksten, techniek en cases komen van
+     leadzsystems.nl/portfolio, zodat beide sites hetzelfde vertellen. */
+  {
+    slug: "happy-face",
+    title: "Happy Face",
+    label: "Website",
+    summary:
+      "Complete website voor een schoonheidssalon in Rijswijk: behandelingen, merken en contact, met een warme en persoonlijke uitstraling.",
+    tech: ["Next.js", "Responsive", "SEO"],
+    caseUrl: "https://leadzsystems.nl/portfolio/happy-face",
+  },
+  {
+    slug: "connect-rise",
+    title: "Connect & Rise",
+    label: "Website",
+    summary:
+      "Website voor een ademcoach met workshops en circles rond ouder & kind, gericht op rust, ruimte en verbinding.",
+    tech: ["Next.js", "Responsive", "SEO"],
+    caseUrl: "https://leadzsystems.nl/portfolio/connect-rise",
+  },
+  {
+    slug: "groeituin",
+    title: "De Groeituin",
+    label: "Website",
+    summary:
+      "Website voor een kinderopvang met dagverblijf, peuteropvang en BSO: een warme uitstraling, heldere informatie per leeftijd en in een paar klikken een rondleiding plannen.",
+    tech: ["Next.js", "Responsive", "SEO"],
+    caseUrl: "https://leadzsystems.nl/portfolio/groeituin",
+  },
+  {
+    slug: "freezo",
+    title: "Freezo",
+    label: "Web-app",
+    summary:
+      "Een centraal dashboard voor zelfstandige professionals om hun werk te organiseren en beheren. Alles op één plek, overzichtelijk en snel.",
+    tech: ["Next.js", "Supabase", "Dashboard"],
+    caseUrl: "https://leadzsystems.nl/portfolio/freezo",
+  },
+
   {
     slug: "documentautomatisering",
     title: "AI-agents en documentautomatisering",
