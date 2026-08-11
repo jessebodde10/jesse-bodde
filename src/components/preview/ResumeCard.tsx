@@ -73,32 +73,31 @@ export function ResumeCard({
           )}
         </span>
 
-        <div className="min-w-0 flex-grow flex-col items-center">
-          {/* Wraps rather than overflowing once the title and period no longer
-              fit side by side, which happens around 320px. */}
-          <div className="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-0.5">
-            <h3 className="flex min-w-0 items-center gap-2 text-sm font-semibold leading-tight text-neutral-900 sm:text-base dark:text-neutral-50">
-              <span className="min-w-0 break-words">{title}</span>
-              {expandable && (
-                <ChevronRight
-                  size={14}
-                  aria-hidden="true"
-                  className={cn(
-                    "shrink-0 text-neutral-500 opacity-60 transition-transform duration-300",
-                    expanded ? "rotate-90" : "rotate-0"
-                  )}
-                />
-              )}
-            </h3>
-            <div className="shrink-0 text-xs tabular-nums text-neutral-500 sm:text-sm dark:text-neutral-400">
-              {period}
-            </div>
-          </div>
+        {/* Narrow screens stack as organisation, role, period, so the dates
+            line up with each other however long the organisation name is.
+            From sm up there is room to put the period back on the title line. */}
+        <div className="flex min-w-0 flex-grow flex-col sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between sm:gap-x-2">
+          <h3 className="order-1 flex min-w-0 items-center gap-2 text-sm font-semibold leading-tight text-neutral-900 sm:text-base dark:text-neutral-50">
+            <span className="min-w-0 break-words">{title}</span>
+            {expandable && (
+              <ChevronRight
+                size={14}
+                aria-hidden="true"
+                className={cn(
+                  "shrink-0 text-neutral-500 opacity-60 transition-transform duration-300",
+                  expanded ? "rotate-90" : "rotate-0"
+                )}
+              />
+            )}
+          </h3>
           {subtitle && (
-            <div className="font-sans text-xs text-neutral-600 dark:text-neutral-400">
+            <div className="order-2 font-sans text-xs text-neutral-600 sm:order-3 sm:w-full dark:text-neutral-400">
               {subtitle}
             </div>
           )}
+          <div className="order-3 mt-0.5 text-xs tabular-nums text-neutral-500 sm:order-2 sm:mt-0 sm:shrink-0 sm:text-sm dark:text-neutral-400">
+            {period}
+          </div>
         </div>
       </div>
 
